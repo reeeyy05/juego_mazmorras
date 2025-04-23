@@ -1,7 +1,5 @@
 package com.alejandro.alberto.modelo;
 
-import java.io.ObjectInputValidation;
-
 /**
  * Clase abstracta que define un personaje del juego
  */
@@ -38,7 +36,9 @@ public abstract class Personaje {
     }
 
     /**
-     * Metodo en el que se introduce la cantidad de daño que ha recibido el personaje y se le resta a la salud
+     * Metodo en el que se introduce la cantidad de daño que ha recibido el
+     * personaje y se le resta a la salud
+     * 
      * @param cantidad cantidad de daño recibido
      */
     public void recibirDanio(int cantidad) {
@@ -47,6 +47,7 @@ public abstract class Personaje {
 
     /**
      * Realiza un ataque sobre otro personaje
+     * 
      * @param objetivo es el personaje sobre el que se va a realizar el ataque
      */
     public void atacar(Personaje objetivo) {
