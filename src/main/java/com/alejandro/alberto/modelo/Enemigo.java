@@ -2,13 +2,18 @@ package com.alejandro.alberto.modelo;
 
 import java.util.Random;
 
+/**
+ * Clase que representa a un enemigo en el juego.
+ * Hereda de la clase Personaje.
+ * 
+ * @author Alejandro Rey Tostado y Alberto García Izquierdo
+ */
+
 public class Enemigo extends Personaje {
     private int percepcion; // rango de vision del enemigo
     
     /**
      * Constructor para los enemigos
-     * 
-     * @author Alejandro Rey Tostado y Alberto García Izquierdo
      * 
      * @param salud salud del enemigo
      * @param fuerza fuerza del enemigo
