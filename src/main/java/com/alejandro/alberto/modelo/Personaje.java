@@ -2,6 +2,8 @@ package com.alejandro.alberto.modelo;
 
 /**
  * Clase abstracta que define un personaje del juego
+ * 
+ * @author Alejandro Rey Tostado y Alberto García Izquierdo
  */
 
 public abstract class Personaje {

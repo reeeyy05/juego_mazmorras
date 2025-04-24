@@ -8,6 +8,8 @@ public class Enemigo extends Personaje {
     /**
      * Constructor para los enemigos
      * 
+     * @author Alejandro Rey Tostado y Alberto García Izquierdo
+     * 
      * @param salud salud del enemigo
      * @param fuerza fuerza del enemigo
      * @param defensa defensa del enemigo
