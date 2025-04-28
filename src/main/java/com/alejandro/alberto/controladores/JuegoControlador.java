@@ -13,7 +13,8 @@ import java.util.List;
 /**
  * Esta clase controla la lógica principal del juego:
  * movimiento del jugador, combate y carga de enemigos.
- * Es utilizada por la interfaz para conectar con el modelo.
+ * 
+ * @author Alberto García Izquierdo y Alejandro Rey Tostado.
  */
 public class JuegoControlador {
 
@@ -81,4 +82,3 @@ public class JuegoControlador {
     }
 
 }
-

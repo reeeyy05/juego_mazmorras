@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.GridPane?>
+
+<!-- Interfaz principal del juego -->
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.alejandro.alberto.controladores.JuegoControlador" onKeyPressed="#manejarTeclado">
+    <center>
+        <GridPane fx:id="gridPaneMapa"
+                  hgap="1" vgap="1"
+                  style="-fx-background-color: black; -fx-padding: 10;">
+        </GridPane>
+    </center>
+
+</BorderPane>

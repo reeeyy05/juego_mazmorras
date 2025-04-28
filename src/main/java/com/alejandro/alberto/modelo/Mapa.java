@@ -26,26 +26,39 @@ public class Mapa {
     /**
      * Carga el mapa línea por línea en una matriz.
      */
-    private void cargarMapa(String rutaArchivo) throws IOException {
-        BufferedReader br = new BufferedReader(new FileReader(rutaArchivo));
-        String linea;
-        int filas = 0;
+    private void cargarMapa(String rutaArchivo) {
+        BufferedReader br = null;
+        try {
+            br = new BufferedReader(new FileReader(rutaArchivo));
+            String linea;
+            int filas = 0;
 
-        // Contar las filas y columnas
-        while ((linea = br.readLine()) != null) {
-            filas++;
-        }
-        br.close();
+            // Contar las filas y columnas
+            while ((linea = br.readLine()) != null) {
+                filas++;
+            }
+            br.close();
 
-        // Leer de nuevo
-        mapa = new char[filas][];
-        br = new BufferedReader(new FileReader(rutaArchivo));
-        int i = 0;
-        while ((linea = br.readLine()) != null) {
-            mapa[i] = linea.toCharArray();
-            i++;
+            // Leer de nuevo
+            mapa = new char[filas][];
+            br = new BufferedReader(new FileReader(rutaArchivo));
+            int i = 0;
+            while ((linea = br.readLine()) != null) {
+                mapa[i] = linea.toCharArray();
+                i++;
+            }
+        } catch (IOException e) {
+            System.err.println("Error al cargar el mapa desde el archivo: " + e.getMessage());
+            e.printStackTrace();
+        } finally {
+            if (br != null) {
+                try {
+                    br.close();
+                } catch (IOException e) {
+                    System.err.println("Error al cerrar el archivo: " + e.getMessage());
+                }
+            }
         }
-        br.close();
     }
 
     /**
