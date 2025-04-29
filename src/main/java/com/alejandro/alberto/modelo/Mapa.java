@@ -49,7 +49,6 @@ public class Mapa {
             }
         } catch (IOException e) {
             System.err.println("Error al cargar el mapa desde el archivo: " + e.getMessage());
-            e.printStackTrace();
         } finally {
             if (br != null) {
                 try {

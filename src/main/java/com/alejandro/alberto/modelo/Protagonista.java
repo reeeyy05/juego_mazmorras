@@ -1,11 +1,16 @@
 package com.alejandro.alberto.modelo;
 
+
+/**
+ * Clase que representa al protagonista en el juego.
+ * Hereda de la clase Personaje.
+ * 
+ * @author Alejandro Rey Tostado y Alberto García Izquierdo
+ */
 public class Protagonista extends Personaje {
 
     /**
      * Constructor para el protagonista
-     * 
-     * @author Alejandro Rey Tostado y Alberto García Izquierdo
      * 
      * @param nombre    nombre del protagonista
      * @param salud     salud del protagonista
