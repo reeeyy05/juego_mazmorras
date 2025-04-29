@@ -11,7 +11,7 @@ import javafx.stage.Stage;
  * 
  * @author Alberto García Izquierdo y Alejandro Rey Tostado
  */
-public class controladorCreacionPersonaje {
+public class controladorPersonaje {
 
     @FXML
     private TextField campoNombre; // Campo de texto donde el jugador escribe su nombre

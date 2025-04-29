@@ -2,20 +2,61 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Spinner?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<!-- Vista para la creación del personaje -->
-<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.alejandro.alberto.controladores.controladorCreacionPersonaje"
-      alignment="CENTER" spacing="20" style="-fx-padding: 20;">
-    
-    <!-- Título -->
-    <Label text="Crea tu personaje" style="-fx-font-size: 24px;"/>
+<StackPane fx:id="root" prefHeight="512" prefWidth="768" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.alejandro.alberto.controladores.controladorPersonaje">
 
-    <!-- Campo para escribir el nombre -->
-    <TextField fx:id="campoNombre" promptText="Escribe tu nombre"/>
+    <ImageView fx:id="imagen_fondo" fitHeight="512" fitWidth="768" preserveRatio="false">
+        <image>
+            <Image url="@../data/fondo_personaje.png" />
+        </image>
+    </ImageView>
 
-    <!-- Botón para aceptar y guardar el nombre -->
-    <Button fx:id="botonAceptar" text="Aceptar" onAction="#manejarAceptar"/>
+    <VBox fx:id="panel" alignment="CENTER" spacing="15">
+        <Label style="-fx-font-size: 26px; -fx-text-fill: white; -fx-font-weight: bold;" text="CREACIÓN DE PERSONAJE" />
 
-</VBox>
+        <!-- Personaje -->
+        <ImageView fx:id="personajeView" fitHeight="110.0" fitWidth="113.0">
+            <image>
+                <Image url="@../data/personaje.png" />
+            </image>
+        </ImageView>
+
+        <!-- Nombre -->
+        <HBox alignment="CENTER" spacing="10">
+            <Label style="-fx-font-weight: bold;" text="Nombre:" textFill="white">
+            <font>
+               <Font size="16.0" />
+            </font></Label>
+            <TextField fx:id="nombreInput" prefWidth="180" promptText="Introduce tu nombre" />
+        </HBox>
+
+        <!-- Salud -->
+        <HBox alignment="CENTER" spacing="10">
+            <Label style="-fx-font-weight: bold;" text="Salud:" textFill="white">
+            <font>
+               <Font size="16.0" />
+            </font></Label>
+            <Spinner fx:id="saludInput" prefWidth="80" />
+        </HBox>
+
+        <!-- Fuerza -->
+        <HBox alignment="CENTER" spacing="10">
+            <Label style="-fx-font-weight: bold;" text="Fuerza:" textFill="white">
+            <font>
+               <Font size="16.0" />
+            </font></Label>
+            <Spinner fx:id="fuerzaInput" prefWidth="80" />
+        </HBox>
+
+        <!-- Botón -->
+        <Button fx:id="comenzarBtn" onAction="#comenzarJuego" style="-fx-background-color: burlywood; -fx-font-weight: bold;" text="Comenzar Juego" />
+    </VBox>
+</StackPane>
