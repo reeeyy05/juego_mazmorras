@@ -26,6 +26,11 @@ public class Enemigo extends Personaje {
         this.percepcion = percepcion;
     }
 
+    @Override
+    public void mover() {
+        
+    }
+
     /**
      * Calcula la distancia entre el enemigo y el protagonista
      * 

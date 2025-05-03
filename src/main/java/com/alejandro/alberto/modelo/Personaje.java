@@ -32,10 +32,9 @@ public abstract class Personaje {
 
     /**
      * Mueve al personaje por el mapa en la direccion que se indique
+     * Este metodo debe ser implementado por las clases hijas
      */
-    public void mover() {
-
-    }
+    public abstract void mover();
 
     /**
      * Metodo en el que se introduce la cantidad de daño que ha recibido el
@@ -44,7 +43,16 @@ public abstract class Personaje {
      * @param cantidad cantidad de daño recibido
      */
     public void recibirDanio(int cantidad) {
+        int danioReal = cantidad - this.defensa;
+        if (danioReal > 0 ) {
+            this.salud -= danioReal;
+            System.out.println(this.nombre + " ha recibido " + danioReal + " puntos de daño. Salud restante: " + this.salud);
+        } else System.out.println(this.nombre + " ha recibido " + cantidad + " puntos de daño. No le afecta por su defensa.");
 
+        if (this.salud <=0) {
+            this.salud = 0;
+            System.out.println(this.nombre + " ha muerto");
+        }
     }
 
     /**
@@ -53,7 +61,17 @@ public abstract class Personaje {
      * @param objetivo es el personaje sobre el que se va a realizar el ataque
      */
     public void atacar(Personaje objetivo) {
+        System.out.println(this.nombre + " ataca a " + objetivo.getNombre() + " con " + this.fuerza + " de fuerza.");
         objetivo.recibirDanio(this.fuerza);
+    }
+
+    /**
+     * Comprueba si el personaje esta vivo o no
+     * 
+     * @return TRUE si el personaje esta vivo, FALSE si no lo esta
+     */
+    public boolean estaVivo() {
+        return this.salud > 0;
     }
 
     // GETTERS Y SETTERS
