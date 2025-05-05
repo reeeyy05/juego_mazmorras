@@ -11,5 +11,4 @@
                   style="-fx-background-color: black; -fx-padding: 10;">
         </GridPane>
     </center>
-
 </BorderPane>
