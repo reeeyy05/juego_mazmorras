@@ -11,7 +11,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<StackPane fx:id="root" prefHeight="512" prefWidth="768" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.alejandro.alberto.controladores.controladorPersonaje">
+<StackPane fx:id="root" prefHeight="512" prefWidth="768" xmlns="http://javafx.com/javafx/23.0.1"
+    xmlns:fx="http://javafx.com/fxml/1"
+    fx:controller="com.alejandro.alberto.controladores.controladorPersonaje">
 
     <!-- Imagen de fondo RPG -->
     <ImageView fitHeight="512" fitWidth="768" preserveRatio="false">
@@ -33,38 +35,45 @@
         </VBox>
 
         <!-- Panel de entrada de datos -->
-        <VBox alignment="CENTER_LEFT" prefHeight="512.0" prefWidth="408.0" spacing="15" style="-fx-padding: 20px; -fx-background-radius: 10;">
-            <Label fx:id="textoPrin" style="-fx-font-weight: bold;" text="CREACIÓN DE PERSONAJE" textFill="WHITE">
-            <font>
-               <Font size="22.0" />
-            </font></Label>
+        <VBox alignment="CENTER_LEFT" prefHeight="512.0" prefWidth="408.0" spacing="15"
+            style="-fx-padding: 20px; -fx-background-radius: 10;">
+            <Label fx:id="textoPrin" style="-fx-font-weight: bold;" text="CREACIÓN DE PERSONAJE"
+                textFill="WHITE">
+                <font>
+                    <Font size="22.0" />
+                </font>
+            </Label>
 
             <HBox alignment="CENTER_LEFT" spacing="10">
                 <Label minWidth="80" style="-fx-font-weight: bold;" text="Nombre:" textFill="white">
-               <font>
-                  <Font size="16.0" />
-               </font></Label>
+                    <font>
+                        <Font size="16.0" />
+                    </font>
+                </Label>
                 <TextField fx:id="nombre" prefWidth="180" promptText="Introduce tu nombre" />
             </HBox>
 
             <HBox alignment="CENTER_LEFT" spacing="10">
                 <Label minWidth="80" style="-fx-font-weight: bold;" text="Salud:" textFill="white">
-               <font>
-                  <Font size="16.0" />
-               </font></Label>
+                    <font>
+                        <Font size="16.0" />
+                    </font>
+                </Label>
                 <Spinner fx:id="salud" prefWidth="100" />
             </HBox>
 
             <HBox alignment="CENTER_LEFT" spacing="10">
                 <Label minWidth="80" style="-fx-font-weight: bold;" text="Fuerza:" textFill="white">
-               <font>
-                  <Font size="16.0" />
-               </font></Label>
+                    <font>
+                        <Font size="16.0" />
+                    </font>
+                </Label>
                 <Spinner fx:id="fuerza" prefWidth="100" />
             </HBox>
 
-            <Button fx:id="comenzarBtn" alignment="CENTER" contentDisplay="CENTER" onAction="#comenzarJuego" prefHeight="35.0" prefWidth="121.0" style="-fx-background-color: white; -fx-font-weight: bold;" text="Comenzar Juego" />
+            <HBox alignment="CENTER">
+                <Button fx:id="comenzarBtn" text="Comenzar Juego" onAction="#comenzarJuego" style="-fx-background-color: white; -fx-font-weight: bold;" />
+            </HBox>
         </VBox>
-
     </HBox>
 </StackPane>
