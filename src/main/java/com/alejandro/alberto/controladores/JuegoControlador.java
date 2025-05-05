@@ -1,14 +1,14 @@
 package com.alejandro.alberto.controladores;
 
-import com.alejandro.alberto.modelo.Enemigo;
-import com.alejandro.alberto.modelo.Mapa;
-import com.alejandro.alberto.modelo.Protagonista;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.alejandro.alberto.modelo.Enemigo;
+import com.alejandro.alberto.modelo.Mapa;
+import com.alejandro.alberto.modelo.Protagonista;
 
 /**
  * Esta clase controla la lógica principal del juego:
@@ -31,7 +31,7 @@ public class JuegoControlador {
      */
     public JuegoControlador(String rutaMapa, String rutaEnemigos, String nombreJugador) throws IOException {
         mapa = new Mapa(rutaMapa);
-        protagonista = new Protagonista(nombreJugador, 1, 1, 100, 10); // posición inicial fija (1,1)
+        protagonista = new Protagonista(nombreJugador, 100, 10, 5); // Valores por defecto
         enemigos = cargarEnemigos(rutaEnemigos);
     }
 
