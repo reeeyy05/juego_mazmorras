@@ -54,7 +54,7 @@ public class JuegoControlador {
 
         }
         br.close();
-        return lista;
+        return lista; 
     }
 
     public Mapa getMapa() {
