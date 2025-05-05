@@ -1,24 +1,14 @@
 package com.alejandro.alberto.controladores;
 
-<<<<<<< HEAD
-import java.io.IOException;
-=======
 import com.alejandro.alberto.modelo.Protagonista;
->>>>>>> 4fe7027fd303af8b15b42577066f25e0dbc03bd1
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-<<<<<<< HEAD
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-=======
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Spinner;
->>>>>>> 4fe7027fd303af8b15b42577066f25e0dbc03bd1
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
@@ -31,40 +21,6 @@ import javafx.stage.Stage;
  * @author Alberto García Izquierdo y Alejandro Rey Tostado
  */
 public class controladorPersonaje {
-<<<<<<< HEAD
-    @FXML
-    private TextField campoNombre;
-
-    @FXML
-    private Button botonIniciar;
-
-    /**
-     * Se ejecuta cuando se presiona el botón de iniciar juego.
-     * Carga la interfaz principal del juego (juego.fxml).
-     */
-    @FXML
-    private void iniciarJuego(ActionEvent event) {
-        String nombreJugador = campoNombre.getText();
-
-        if (nombreJugador == null || nombreJugador.trim().isEmpty()) {
-            System.out.println("Por favor, introduce un nombre.");
-            return;
-        }
-
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/alejandro/alberto/vistas/juego.fxml"));
-            Parent root = loader.load();
-
-
-            Stage stage = (Stage) botonIniciar.getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-}
-=======
     /**
      * Campo que representa el nombre del personaje
      */
@@ -100,7 +56,7 @@ public class controladorPersonaje {
     }
 
     @FXML
-    public  void comenzar(ActionEvent event) {
+    public void comenzar(ActionEvent event) {
         try {
             // Obtener los valores ingresados por el usuario
             String nombrePersonaje = nombre.getText();
@@ -132,4 +88,3 @@ public class controladorPersonaje {
     }
     
 }
->>>>>>> 4fe7027fd303af8b15b42577066f25e0dbc03bd1
