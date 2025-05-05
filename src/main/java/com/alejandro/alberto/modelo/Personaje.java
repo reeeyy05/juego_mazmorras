@@ -11,7 +11,6 @@ public abstract class Personaje {
     protected int salud;
     protected int fuerza;
     protected int defensa;
-    protected int velocidad;
 
     /**
      * Constructor para todos los personajes
@@ -20,14 +19,12 @@ public abstract class Personaje {
      * @param salud salud del personaje
      * @param fuerza fuerza del personaje
      * @param defensa defensa del personaje
-     * @param velocidad velocidad del personaje
      */
-    public Personaje(String nombre, int salud, int fuerza, int defensa, int velocidad) {
+    public Personaje(String nombre, int salud, int fuerza, int defensa) {
         this.nombre = nombre;
         this.salud = salud;
         this.fuerza = fuerza;
         this.defensa = defensa;
-        this.velocidad = velocidad;
     }
 
     /**
@@ -105,13 +102,5 @@ public abstract class Personaje {
 
     public void setDefensa(int defensa) {
         this.defensa = defensa;
-    }
-
-    public int getVelocidad() {
-        return this.velocidad;
-    }
-
-    public void setVelocidad(int velocidad) {
-        this.velocidad = velocidad;
     }
 }
