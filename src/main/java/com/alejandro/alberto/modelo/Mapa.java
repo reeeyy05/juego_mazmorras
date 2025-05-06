@@ -14,7 +14,7 @@ import java.util.List;
  */
 public class Mapa {
 
-    private char[][] mapa;
+    private Celda[][] celda;
 
     /**
      * Constructor: carga el mapa desde un archivo de texto.
@@ -26,7 +26,10 @@ public class Mapa {
     }
 
     /**
-     * Carga el mapa línea por línea en una matriz.
+     * Carga el mapa desde un archivo de texto.
+     * El archivo debe contener 'P' para paredes y 'S' para suelos.
+     * 
+     * @param rutaArchivo Ruta del archivo del mapa.
      */
     private void cargarMapa(String rutaArchivo) {
         try (BufferedReader br = new BufferedReader(new FileReader(rutaArchivo))) {
@@ -37,49 +40,28 @@ public class Mapa {
                 lineas.add(linea);
             }
 
-            // Inicializar mapa
-            mapa = new char[lineas.size()][];
-            for (int i = 0; i < lineas.size(); i++) {
-                mapa[i] = lineas.get(i).toCharArray();
-            }
+            int filas = lineas.size();
+            int columnas = lineas.get(0).split(" ").length;
 
+            celda = new Celda[filas][columnas];
+
+            for (int i = 0; i < filas; i++) {
+                String[] elementos = lineas.get(i).split(" ");
+                for (int j = 0; j < columnas; j++) {
+                    String tipo = elementos[j].equals("P") ? "pared" : "suelo";
+                    celda[i][j] = new Celda(tipo, i, j);
+                }
+            }
         } catch (IOException e) {
             System.err.println("Error al cargar el mapa: " + e.getMessage());
         }
     }
 
-    /**
-     * Verifica si una celda es una pared "P".
-     */
-    public boolean esPared(int x, int y) {
-        return mapa[x][y] == 'P';
+    public Celda[][] getCelda() {
+        return this.celda;
     }
 
-    /**
-     * Devuelve true si la celda es suelo "S".
-     */
-    public boolean esSuelo(int x, int y) {
-        return mapa[x][y] == 'S';
-    }
-
-    /**
-     * Devuelve el alto del mapa.
-     */
-    public int getAlto() {
-        return mapa.length;
-    }
-
-    /**
-     * Devuelve el ancho del mapa.
-     */
-    public int getAncho() {
-        return mapa[0].length;
-    }
-
-    /**
-     * Devuelve el mapa completo.
-     */
-    public char[][] getMapa() {
-        return mapa;
+    public void setCelda(Celda[][] celda) {
+        this.celda = celda;
     }
 }
