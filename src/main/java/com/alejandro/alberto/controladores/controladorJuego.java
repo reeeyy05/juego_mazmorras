@@ -16,7 +16,7 @@ import com.alejandro.alberto.modelo.Protagonista;
  * 
  * @author Alberto García Izquierdo y Alejandro Rey Tostado.
  */
-public class JuegoControlador {
+public class controladorJuego {
 
     private Mapa mapa; // El escenario del juego (paredes y suelos)
     private Protagonista protagonista; // El jugador
@@ -29,7 +29,7 @@ public class JuegoControlador {
      * @param rutaEnemigos  Archivo de texto con enemigos
      * @param nombreJugador Nombre que el usuario ingresó
      */
-    public JuegoControlador(String rutaMapa, String rutaEnemigos, String nombreJugador) throws IOException {
+    public controladorJuego(String rutaMapa, String rutaEnemigos, String nombreJugador) throws IOException {
         mapa = new Mapa(rutaMapa);
         protagonista = new Protagonista(nombreJugador, 100, 10, 5); // Valores por defecto
         enemigos = cargarEnemigos(rutaEnemigos);
