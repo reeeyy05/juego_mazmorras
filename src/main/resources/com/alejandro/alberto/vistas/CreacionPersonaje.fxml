@@ -72,7 +72,7 @@
             </HBox>
 
             <HBox alignment="CENTER">
-                <Button fx:id="botonIniciar" text="Comenzar Juego" onAction="#comenzarJuego" style="-fx-background-color: white; -fx-font-weight: bold;" />
+                <Button fx:id="comenzarBtn" text="Comenzar Juego" onAction="#comenzar" style="-fx-background-color: white; -fx-font-weight: bold;" />
             </HBox>
         </VBox>
     </HBox>

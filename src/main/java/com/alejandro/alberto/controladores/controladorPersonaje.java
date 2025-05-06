@@ -1,15 +1,17 @@
 package com.alejandro.alberto.controladores;
 
+import com.alejandro.alberto.modelo.Protagonista;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
-import javafx.scene.Node;
 
 /**
  * Controlador de la vista CreacionPersonaje
@@ -19,39 +21,70 @@ import javafx.scene.Node;
  * @author Alberto García Izquierdo y Alejandro Rey Tostado
  */
 public class controladorPersonaje {
+    /**
+     * Campo que representa el nombre del personaje
+     */
     @FXML
-    private TextField campoNombre;
+    private TextField nombre;
+
+    /**
+     * Campo que representa la salud del personaje
+     */
+    @FXML
+    private Spinner<Integer> salud;
+
+    /**
+     * Campo que representa la fuerza del personaje
+     */
+    @FXML
+    private Spinner<Integer> fuerza;
+
+    /**
+     * Campo que representa la imagen del personaje
+     * Se carga desde el archivo de data
+     */
+    @FXML
+    private ImageView personaje;
 
     @FXML
-    private Spinner<Integer> saludInput;
+    private void initialize() {
+        // Cargar la imagen del personaje desde el archivo de data
+        personaje.setImage(new ImageView("data/Personaje.png").getImage());
+        // Inicializar los valores de salud y fuerza
+        salud.getValueFactory().setValue(100); // Valor por defecto de salud
+        fuerza.getValueFactory().setValue(10); // Valor por defecto de fuerza
+    }
 
     @FXML
-    private Spinner<Integer> fuerzaInput;
-
-    @FXML
-    private Button botonIniciar;
-
-    @FXML
-    public void comenzarJuego(ActionEvent event) {
+    public void comenzar(ActionEvent event) {
         try {
-            String nombreJugador = campoNombre.getText();
-            String rutaMapa = "src/main/resources/com/alejandro/alberto/data/escenario.txt";
+            // Obtener los valores ingresados por el usuario
+            String nombrePersonaje = nombre.getText();
+            int saludPersonaje = salud.getValue();
+            int fuerzaPersonaje = fuerza.getValue();
 
+            // Validar que el nombre no esté vacío
+            if (nombrePersonaje.isEmpty()) {
+                System.out.println("Por favor, ingresa un nombre para tu personaje.");
+                return;
+            }
+            // Crear el protagonista con los valores ingresados
+            Protagonista protagonista = new Protagonista(nombrePersonaje, saludPersonaje, fuerzaPersonaje, 5); // Defensa por defecto
+            
+            // Cargar nueva vista
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/alejandro/alberto/vistas/Juego.fxml"));
+            // Esto nos permite cargar la vista de Juego
             Parent root = loader.load();
 
-            // Accede al controlador y pásale los datos
-            JuegoControlador juegoControlador = loader.getController();
-            juegoControlador.inicializarDatos(nombreJugador, rutaMapa);
-
-            // Cambia de escena
-            Scene scene = new Scene(root);
+            // Cambiar la escena
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(scene);
+            stage.setScene(new Scene(root));
+            stage.setTitle("Juego");
             stage.show();
 
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("Error al iniciar la partida: " + e.getMessage());
         }
     }
+    
 }

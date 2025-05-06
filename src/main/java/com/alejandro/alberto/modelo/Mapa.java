@@ -3,6 +3,8 @@ package com.alejandro.alberto.modelo;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Clase que representa el escenario del juego.
@@ -27,36 +29,22 @@ public class Mapa {
      * Carga el mapa línea por línea en una matriz.
      */
     private void cargarMapa(String rutaArchivo) {
-        BufferedReader br = null;
-        try {
-            br = new BufferedReader(new FileReader(rutaArchivo));
+        try (BufferedReader br = new BufferedReader(new FileReader(rutaArchivo))) {
+            // Leer todas las lineas
+            List<String> lineas = new ArrayList<>();
             String linea;
-            int filas = 0;
-
-            // Contar las filas y columnas
             while ((linea = br.readLine()) != null) {
-                filas++;
+                lineas.add(linea);
             }
-            br.close();
 
-            // Leer de nuevo
-            mapa = new char[filas][];
-            br = new BufferedReader(new FileReader(rutaArchivo));
-            int i = 0;
-            while ((linea = br.readLine()) != null) {
-                mapa[i] = linea.toCharArray();
-                i++;
+            // Inicializar mapa
+            mapa = new char[lineas.size()][];
+            for (int i = 0; i < lineas.size(); i++) {
+                mapa[i] = lineas.get(i).toCharArray();
             }
+
         } catch (IOException e) {
-            System.err.println("Error al cargar el mapa desde el archivo: " + e.getMessage());
-        } finally {
-            if (br != null) {
-                try {
-                    br.close();
-                } catch (IOException e) {
-                    System.err.println("Error al cerrar el archivo: " + e.getMessage());
-                }
-            }
+            System.err.println("Error al cargar el mapa: " + e.getMessage());
         }
     }
 

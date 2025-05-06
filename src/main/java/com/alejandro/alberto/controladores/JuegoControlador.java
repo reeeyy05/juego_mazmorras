@@ -1,16 +1,14 @@
 package com.alejandro.alberto.controladores;
 
-import com.alejandro.alberto.modelo.Enemigo;
-import com.alejandro.alberto.modelo.Mapa;
-import com.alejandro.alberto.modelo.Protagonista;
-
-import javafx.fxml.FXML;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.alejandro.alberto.modelo.Enemigo;
+import com.alejandro.alberto.modelo.Mapa;
+import com.alejandro.alberto.modelo.Protagonista;
 
 /**
  * Esta clase controla la lógica principal del juego:
@@ -33,24 +31,8 @@ public class JuegoControlador {
      */
     public JuegoControlador(String rutaMapa, String rutaEnemigos, String nombreJugador) throws IOException {
         mapa = new Mapa(rutaMapa);
-        protagonista = new Protagonista(nombreJugador, 1, 1, 100, 10); // posición inicial fija (1,1)
+        protagonista = new Protagonista(nombreJugador, 100, 10, 5); // Valores por defecto
         enemigos = cargarEnemigos(rutaEnemigos);
-    }
-
-    @FXML
-    public void inicializarDatos(String nombreJugador, String rutaMapa) {
-        try {
-            this.mapa = new Mapa(rutaMapa);
-            this.protagonista = new Protagonista(nombreJugador, 1, 1, 100, 10);
-
-            // Cargar enemigos por imágenes ya no necesita texto
-            this.enemigos = new ArrayList<>(); // Se inicializa vacío, puedes añadirlos luego si es necesario
-
-            System.out.println("Juego inicializado con " + nombreJugador);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     /**
@@ -72,7 +54,7 @@ public class JuegoControlador {
 
         }
         br.close();
-        return lista;
+        return lista; 
     }
 
     public Mapa getMapa() {
