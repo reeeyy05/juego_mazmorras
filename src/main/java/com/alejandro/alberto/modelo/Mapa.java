@@ -10,7 +10,7 @@ import java.util.List;
  * Clase que representa el escenario del juego.
  * Usa una matriz de caracteres donde 'P' es pared y 'S' es suelo.
  * 
- * @author Alejandro Rey Tostado y Alberto García Izquierdo
+ * @author Alejandro Rey Tostado y Alberto García Izquierdo.
  */
 public class Mapa {
 
