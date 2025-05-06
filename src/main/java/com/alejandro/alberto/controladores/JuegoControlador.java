@@ -4,6 +4,8 @@ import com.alejandro.alberto.modelo.Enemigo;
 import com.alejandro.alberto.modelo.Mapa;
 import com.alejandro.alberto.modelo.Protagonista;
 
+import javafx.fxml.FXML;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -35,6 +37,22 @@ public class JuegoControlador {
         enemigos = cargarEnemigos(rutaEnemigos);
     }
 
+    @FXML
+    public void inicializarDatos(String nombreJugador, String rutaMapa) {
+        try {
+            this.mapa = new Mapa(rutaMapa);
+            this.protagonista = new Protagonista(nombreJugador, 1, 1, 100, 10);
+
+            // Cargar enemigos por imágenes ya no necesita texto
+            this.enemigos = new ArrayList<>(); // Se inicializa vacío, puedes añadirlos luego si es necesario
+
+            System.out.println("Juego inicializado con " + nombreJugador);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     /**
      * Carga los enemigos desde un archivo:
      * nombre,salud,fuerza,defensa,velocidad,percepcion.
@@ -54,7 +72,7 @@ public class JuegoControlador {
 
         }
         br.close();
-        return lista; 
+        return lista;
     }
 
     public Mapa getMapa() {
