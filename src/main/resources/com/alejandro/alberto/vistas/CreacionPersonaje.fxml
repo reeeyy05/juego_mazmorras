@@ -11,9 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<StackPane fx:id="root" prefHeight="512" prefWidth="768" xmlns="http://javafx.com/javafx/23.0.1"
-    xmlns:fx="http://javafx.com/fxml/1"
-    fx:controller="com.alejandro.alberto.controladores.controladorPersonaje">
+<StackPane fx:id="root" prefHeight="512" prefWidth="768" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.alejandro.alberto.controladores.controladorPersonaje">
 
     <!-- Imagen de fondo RPG -->
     <ImageView fitHeight="512" fitWidth="768" preserveRatio="false">
@@ -35,12 +33,10 @@
         </VBox>
 
         <!-- Panel de entrada de datos -->
-        <VBox alignment="CENTER_LEFT" prefHeight="512.0" prefWidth="408.0" spacing="15"
-            style="-fx-padding: 20px; -fx-background-radius: 10;">
-            <Label fx:id="textoPrin" style="-fx-font-weight: bold;" text="CREACIÓN DE PERSONAJE"
-                textFill="WHITE">
+        <VBox alignment="CENTER_LEFT" prefHeight="512.0" prefWidth="408.0" spacing="15" style="-fx-padding: 20px; -fx-background-radius: 10;">
+            <Label fx:id="textoPrin" text="CREACIÓN DE PERSONAJE" textFill="WHITE">
                 <font>
-                    <Font size="22.0" />
+                    <Font name="Bookman Old Style" size="22.0" />
                 </font>
             </Label>
 
@@ -72,7 +68,7 @@
             </HBox>
 
             <HBox alignment="CENTER">
-                <Button fx:id="comenzarBtn" text="Comenzar Juego" onAction="#comenzar" style="-fx-background-color: white; -fx-font-weight: bold;" />
+                <Button fx:id="comenzarBtn" onAction="#comenzar" style="-fx-background-color: white; -fx-font-weight: bold;" text="Comenzar Juego" />
             </HBox>
         </VBox>
     </HBox>
