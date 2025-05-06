@@ -1,15 +1,15 @@
 package com.alejandro.alberto.controladores;
 
-import java.io.IOException;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Spinner;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import javafx.scene.Node;
 
 /**
  * Controlador de la vista CreacionPersonaje
@@ -23,30 +23,34 @@ public class controladorPersonaje {
     private TextField campoNombre;
 
     @FXML
+    private Spinner<Integer> saludInput;
+
+    @FXML
+    private Spinner<Integer> fuerzaInput;
+
+    @FXML
     private Button botonIniciar;
 
-    /**
-     * Se ejecuta cuando se presiona el botón de iniciar juego.
-     * Carga la interfaz principal del juego (juego.fxml).
-     */
     @FXML
-    private void iniciarJuego(ActionEvent event) {
-        String nombreJugador = campoNombre.getText();
-
-        if (nombreJugador == null || nombreJugador.trim().isEmpty()) {
-            System.out.println("Por favor, introduce un nombre.");
-            return;
-        }
-
+    public void comenzarJuego(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/alejandro/alberto/vistas/juego.fxml"));
+            String nombreJugador = campoNombre.getText();
+            String rutaMapa = "src/main/resources/com/alejandro/alberto/data/escenario.txt";
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/alejandro/alberto/vistas/Juego.fxml"));
             Parent root = loader.load();
 
+            // Accede al controlador y pásale los datos
+            JuegoControlador juegoControlador = loader.getController();
+            juegoControlador.inicializarDatos(nombreJugador, rutaMapa);
 
-            Stage stage = (Stage) botonIniciar.getScene().getWindow();
-            stage.setScene(new Scene(root));
+            // Cambia de escena
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
             stage.show();
-        } catch (IOException e) {
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
