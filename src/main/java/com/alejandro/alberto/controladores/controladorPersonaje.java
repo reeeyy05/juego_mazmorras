@@ -49,7 +49,7 @@ public class controladorPersonaje {
     @FXML
     private void initialize() {
         // Cargar la imagen del personaje desde el archivo de data
-        personaje.setImage(new ImageView("data/Personaje.png").getImage());
+        personaje.setImage(new ImageView("/com/alejandro/alberto/data/personaje.png").getImage());
         // Inicializar los valores de salud y fuerza
         salud.getValueFactory().setValue(100); // Valor por defecto de salud
         fuerza.getValueFactory().setValue(10); // Valor por defecto de fuerza
