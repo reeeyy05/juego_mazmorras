@@ -6,9 +6,16 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.alejandro.alberto.modelo.Celda;
 import com.alejandro.alberto.modelo.Enemigo;
 import com.alejandro.alberto.modelo.Mapa;
 import com.alejandro.alberto.modelo.Protagonista;
+
+import javafx.fxml.FXML;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 
 /**
  * Esta clase controla la lógica principal del juego:
@@ -54,8 +61,43 @@ public class controladorJuego {
 
         }
         br.close();
-        return lista; 
+        return lista;
     }
+
+    @FXML
+    private void dibujarMapa() {
+        gridMapa.getChildren().clear(); // Limpia el GridPane
+
+        Celda[][] celdas = mapa.getCelda(); // Método que debe devolver la matriz de celdas
+
+        for (int fila = 0; fila < celdas.length; fila++) {
+            for (int columna = 0; columna < celdas[fila].length; columna++) {
+                Celda celda = celdas[fila][columna];
+
+                Rectangle rect = new Rectangle(32, 32); // Cada celda mide 32x32 px
+
+                if (celda.getTipo().equals("pared")) {
+                    rect.setFill(Color.DARKGRAY); // Color de pared
+                } else {
+                    rect.setFill(Color.BEIGE); // Color de suelo
+                }
+
+                // Si hay personaje, lo pintamos encima
+                if (celda.estaOcupada()) {
+                    if (celda.getPersonaje().esProtagonista()) {
+                        rect.setFill(Color.BLUE); // El jugador
+                    } else {
+                        rect.setFill(Color.RED); // Enemigo
+                    }
+                }
+
+                gridMapa.add(rect, columna, fila); // ¡Recuerda que el orden es (columna, fila)!
+            }
+        }
+    }
+
+    @FXML
+    private GridPane gridMapa;
 
     public Mapa getMapa() {
         return this.mapa;

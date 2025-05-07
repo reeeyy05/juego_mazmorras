@@ -62,6 +62,10 @@ public abstract class Personaje {
         objetivo.recibirDanio(this.fuerza);
     }
 
+    public boolean esProtagonista() {
+        return this instanceof Protagonista;
+    }
+
     /**
      * Comprueba si el personaje esta vivo o no
      * 
