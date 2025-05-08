@@ -1,15 +1,15 @@
 package com.alejandro.alberto.controladores;
 
 import com.alejandro.alberto.modelo.Protagonista;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Spinner;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
@@ -21,70 +21,73 @@ import javafx.stage.Stage;
  * @author Alberto García Izquierdo y Alejandro Rey Tostado
  */
 public class controladorPersonaje {
-    /**
-     * Campo que representa el nombre del personaje
-     */
     @FXML
     private TextField nombre;
-
-    /**
-     * Campo que representa la salud del personaje
-     */
     @FXML
-    private Spinner<Integer> salud;
-
-    /**
-     * Campo que representa la fuerza del personaje
-     */
+    private TextField salud;
     @FXML
-    private Spinner<Integer> fuerza;
-
-    /**
-     * Campo que representa la imagen del personaje
-     * Se carga desde el archivo de data
-     */
+    private TextField fuerza;
     @FXML
     private ImageView personaje;
 
     @FXML
     private void initialize() {
-        // Cargar la imagen del personaje desde el archivo de data
-        personaje.setImage(new ImageView("/com/alejandro/alberto/data/personaje.png").getImage());
-        // Inicializar los valores de salud y fuerza
-        salud.getValueFactory().setValue(100); // Valor por defecto de salud
-        fuerza.getValueFactory().setValue(10); // Valor por defecto de fuerza
+        try {
+            // Cargar la imagen del personaje
+            Image image = new Image(getClass().getResourceAsStream("/com/alejandro/alberto/data/personaje.png"));
+            personaje.setImage(image);
+
+        } catch (Exception e) {
+            System.err.println("Error al cargar la imagen: " + e.getMessage());
+        }
     }
 
     @FXML
     public void comenzar(ActionEvent event) {
         try {
-            // Obtener los valores ingresados por el usuario
             String nombrePersonaje = nombre.getText();
-            int saludPersonaje = salud.getValue();
-            int fuerzaPersonaje = fuerza.getValue();
 
-            // Validar que el nombre no esté vacío
+            // Validar nombre
             if (nombrePersonaje.isEmpty()) {
-                System.out.println("Por favor, ingresa un nombre para tu personaje.");
+                mostrarAlerta("Error", "Por favor, ingresa un nombre para tu personaje.");
                 return;
             }
-            // Crear el protagonista con los valores ingresados
-            Protagonista protagonista = new Protagonista(nombrePersonaje, saludPersonaje, fuerzaPersonaje, 5); // Defensa por defecto
-            
-            // Cargar nueva vista
+
+            // Validar y convertir valores numéricos
+            int saludPersonaje = Integer.parseInt(salud.getText());
+            int fuerzaPersonaje = Integer.parseInt(fuerza.getText());
+
+            // Validar valores positivos
+            if (saludPersonaje <= 0 || fuerzaPersonaje <= 0) {
+                mostrarAlerta("Error", "Salud y fuerza deben ser valores positivos.");
+                return;
+            }
+
+            // Crear protagonista
+            Protagonista protagonista = new Protagonista(nombrePersonaje, saludPersonaje, fuerzaPersonaje, 5);
+
+            // Cargar vista del juego
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/alejandro/alberto/vistas/Juego.fxml"));
-            // Esto nos permite cargar la vista de Juego
             Parent root = loader.load();
 
-            // Cambiar la escena
+            // Cambiar escena
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.setTitle("Juego");
             stage.show();
 
+        } catch (NumberFormatException e) {
+            mostrarAlerta("Error", "Por favor ingresa valores numéricos válidos para salud y fuerza.");
         } catch (Exception e) {
-            System.out.println("Error al iniciar la partida: " + e.getMessage());
+            mostrarAlerta("Error", "Error al iniciar la partida: " + e.getMessage());
         }
     }
-    
+
+    private void mostrarAlerta(String titulo, String mensaje) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(titulo);
+        alert.setHeaderText(null);
+        alert.setContentText(mensaje);
+        alert.showAndWait();
+    }
 }

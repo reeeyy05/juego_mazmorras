@@ -55,7 +55,7 @@
                         <Font size="16.0" />
                     </font>
                 </Label>
-                <Spinner fx:id="salud" prefWidth="100" />
+                <TextField fx:id="salud" promptText="100"/>
             </HBox>
 
             <HBox alignment="CENTER_LEFT" spacing="10">
@@ -64,7 +64,7 @@
                         <Font size="16.0" />
                     </font>
                 </Label>
-                <Spinner fx:id="fuerza" prefWidth="100" />
+                <TextField fx:id="fuerza" promptText="10"/>
             </HBox>
 
             <HBox alignment="CENTER">
@@ -73,3 +73,4 @@
         </VBox>
     </HBox>
 </StackPane>
+

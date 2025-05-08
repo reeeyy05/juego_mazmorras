@@ -31,19 +31,22 @@ public class controladorJuego {
     @FXML
     private List<Enemigo> enemigos; // Lista de enemigos
 
-    private Image imgProtagonista = new Image("data/personaje.png"); // Imagen del protagonista
+    private Image imgProtagonista = new Image(
+            getClass().getResourceAsStream("/com/alejandro/alberto/imagenes/protagonista.png"));
     private int jugadorColumna = 1;
     private int jugadorFila = 1;
     private List<String> mapa = new ArrayList<>();
 
-    @FXML
-    public void initialize() {
-        // Cargar imagen protagonista
-        imgProtagonista = new Image("file:src/main/resources/com/alejandro/alberto/imagenes/protagonista.png");
-        // Cargar mapa
-        cargarMapa("src/main/resources/data/escenario.txt");
-        // Crear jugador y añadirlo al GridPane
-        crearJugador();
+    public void inicializarJuego() {
+        if (protagonista != null) {
+            // Cargar imagen protagonista
+            imgProtagonista = new Image(
+                    getClass().getResourceAsStream("/com/alejandro/alberto/imagenes/protagonista.png"));
+            // Cargar mapa
+            cargarMapa("src/main/resources/data/escenario.txt");
+            // Crear jugador
+            crearJugador();
+        }
     }
 
     /**
