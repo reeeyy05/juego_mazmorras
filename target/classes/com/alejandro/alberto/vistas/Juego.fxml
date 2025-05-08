@@ -9,26 +9,30 @@
 <?import javafx.scene.layout.VBox?>
 
 <GridPane hgap="0" style="-fx-background-color: #333333;" vgap="0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.alejandro.alberto.controladores.ControladorJuego">
-    <!-- Panel izquierdo para el tablero -->
-    <ImageView fitHeight="512.0" fitWidth="478.0" preserveRatio="true" GridPane.columnIndex="0" GridPane.rowIndex="0">
-      <image>
-         <Image url="@../data/tablero.png" />
-      </image>
+
+    <!-- Panel izquierdo para el tablero (tamaño medio) -->
+    <ImageView fitHeight="448.0" fitWidth="448.0" preserveRatio="true" GridPane.columnIndex="0" GridPane.rowIndex="0">
+        <image>
+            <Image url="@../data/tablero.png" />
+        </image>
     </ImageView>
 
     <!-- Panel derecho para las estadísticas del jugador -->
-    <VBox prefHeight="512" prefWidth="348.0" spacing="20" style="-fx-background-color: #333333; -fx-padding: 20px;" GridPane.columnIndex="1" GridPane.rowIndex="0">
-        <Label fx:id="aviso" prefHeight="30.0" prefWidth="323.0" style="-fx-font-size: 14px; -fx-text-fill: white;" text="Para mover al jugador tienes que usar las flechas" />
+    <VBox prefHeight="512" prefWidth="320.0" spacing="20" style="-fx-background-color: #333333; -fx-padding: 20px;" GridPane.columnIndex="1" GridPane.rowIndex="0">
+        <Label fx:id="aviso" style="-fx-font-size: 14px; -fx-text-fill: white;" text="El jugador se mueve con las flechas" />
         <Label fx:id="nombre" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: white;" text="Nombre:" />
         <Label fx:id="salud" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: white;" text="Salud:" />
         <Label fx:id="fuerza" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: white;" text="Fuerza:" />
         <Label fx:id="defensa" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: white;" text="Defensa:" />
     </VBox>
-   <columnConstraints>
-      <ColumnConstraints />
-      <ColumnConstraints />
-   </columnConstraints>
-   <rowConstraints>
-      <RowConstraints />
-   </rowConstraints>
+
+    <!-- Columnas y filas -->
+    <columnConstraints>
+        <ColumnConstraints prefWidth="448" />
+        <ColumnConstraints prefWidth="320" />
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints prefHeight="512" />
+    </rowConstraints>
+
 </GridPane>

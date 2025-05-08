@@ -12,6 +12,9 @@ public abstract class Personaje {
     protected int fuerza;
     protected int defensa;
 
+    protected int x;
+    protected int y;
+
     /**
      * Constructor para todos los personajes
      * 
@@ -27,11 +30,17 @@ public abstract class Personaje {
         this.defensa = defensa;
     }
 
+    // METODOS
     /**
-     * Mueve al personaje por el mapa en la direccion que se indique
-     * Este metodo debe ser implementado por las clases hijas
+     * Mueve al personaje a una nueva posicion
+     * 
+     * @param x nueva posicion en el eje X
+     * @param y nueva posicion en el eje Y
      */
-    public abstract void mover();
+    public void setPosicion(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
 
     /**
      * Metodo en el que se introduce la cantidad de daño que ha recibido el
@@ -76,6 +85,7 @@ public abstract class Personaje {
     }
 
     // GETTERS Y SETTERS
+
     public String getNombre() {
         return this.nombre;
     }
@@ -107,4 +117,21 @@ public abstract class Personaje {
     public void setDefensa(int defensa) {
         this.defensa = defensa;
     }
+
+    public int getX() {
+        return this.x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public int getY() {
+        return this.y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+    
 }
