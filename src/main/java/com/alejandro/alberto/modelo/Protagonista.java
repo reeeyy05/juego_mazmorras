@@ -19,9 +19,4 @@ public class Protagonista extends Personaje {
     public Protagonista(String nombre, int salud, int fuerza, int defensa) {
         super(nombre, salud, fuerza, defensa);
     }
-
-    @Override
-    public void mover() {
-
-    }
 }

@@ -9,6 +9,8 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 /**
+ * Clase principal de la aplicacion
+ * 
  * @author Alejandro Rey Tostado y Alberto García Izquierdo
  */
 public class App extends Application {
