@@ -1,38 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<GridPane hgap="0" style="-fx-background-color: #333333;" vgap="0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.alejandro.alberto.controladores.controladorJuego">
+<GridPane hgap="0" vgap="0" xmlns="http://javafx.com/javafx/23.0.1" 
+          xmlns:fx="http://javafx.com/fxml/1" 
+          fx:controller="com.alejandro.alberto.controladores.controladorJuego"
+          onKeyPressed="#manejarTeclas">
 
-    <!-- Panel izquierdo para el tablero (tamaño medio) -->
-    <ImageView fitHeight="448.0" fitWidth="448.0" preserveRatio="true" GridPane.columnIndex="0" GridPane.rowIndex="0">
-        <image>
-            <Image url="@../data/tablero.png" />
-        </image>
-    </ImageView>
+    <!-- Panel del tablero 15x15 -->
+    <GridPane fx:id="mapaGrid" hgap="0" vgap="0" GridPane.columnIndex="0" GridPane.rowIndex="0">
+    </GridPane>
 
-    <!-- Panel derecho para las estadísticas del jugador -->
-    <VBox prefHeight="512" prefWidth="320.0" spacing="20" style="-fx-background-color: #333333; -fx-padding: 20px;" GridPane.columnIndex="1" GridPane.rowIndex="0">
-        <Label fx:id="aviso" style="-fx-font-size: 14px; -fx-text-fill: white;" text="El jugador se mueve con las flechas" />
-        <Label fx:id="nombre" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: white;" text="Nombre:" />
-        <Label fx:id="salud" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: white;" text="Salud:" />
-        <Label fx:id="fuerza" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: white;" text="Fuerza:" />
-        <Label fx:id="defensa" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: white;" text="Defensa:" />
+    <!-- Panel de estadísticas -->
+    <VBox spacing="10" style="-fx-padding: 20px; -fx-background-color: #333333;" 
+          GridPane.columnIndex="1" GridPane.rowIndex="0">
+        <Label text="Controles: Flechas" style="-fx-text-fill: white; -fx-font-weight: bold;"/>
+        <Label fx:id="nombre" text="Nombre: " style="-fx-text-fill: white;"/>
+        <Label fx:id="salud" text="Salud: " style="-fx-text-fill: white;"/>
+        <Label fx:id="fuerza" text="Fuerza: " style="-fx-text-fill: white;"/>
+        <Label fx:id="defensa" text="Defensa: " style="-fx-text-fill: white;"/>
     </VBox>
 
-    <!-- Columnas y filas -->
     <columnConstraints>
-        <ColumnConstraints prefWidth="448" />
-        <ColumnConstraints prefWidth="320" />
+        <ColumnConstraints prefWidth="450"/> <!-- 15x30 -->
+        <ColumnConstraints prefWidth="250"/>
     </columnConstraints>
     <rowConstraints>
-        <RowConstraints prefHeight="512" />
+        <RowConstraints prefHeight="450"/> <!-- 15x30 -->
     </rowConstraints>
-
 </GridPane>
