@@ -11,6 +11,8 @@ import javafx.stage.Stage;
 /**
  * Clase principal que inicia la aplicación del juego de mazmorras.
  * Gestiona el cambio entre vistas
+ * 
+ * @author Alejandro Rey Tostado y Alberto García Izquierdo
  */
 public class App extends Application {
 
