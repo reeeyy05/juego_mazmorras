@@ -11,9 +11,17 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+/**
+ * Clase principal de la aplicación
+ * 
+ * @autor Alejandro Rey Tostado
+ * @autor Alberto García Izquierdo
+ */
+
 public class App extends Application {
+
     private static Stage primaryStage;
-    private static Protagonista protagonista;
+    private static Protagonista protagonistaActual;
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -30,16 +38,15 @@ public class App extends Application {
     }
 
     public static void mostrarVistaJuego(Protagonista protagonista) throws IOException {
-        App.protagonista = protagonista;
+        protagonistaActual = protagonista;
         FXMLLoader loader = new FXMLLoader(App.class.getResource("/com/alejandro/alberto/vistas/Juego.fxml"));
         Parent root = loader.load();
         
         controladorJuego controller = loader.getController();
-        controller.setProtagonista(protagonista);
-        controller.initialize();
-        
+        controller.setProtagonista(protagonistaActual); // Configura el protagonista
+
         primaryStage.setScene(new Scene(root, 800, 600));
-        primaryStage.setTitle("Juego de Mazmorras - " + protagonista.getNombre());
+        primaryStage.setTitle("Juego de Mazmorras - " + protagonistaActual.getNombre());
         root.requestFocus();
     }
 
