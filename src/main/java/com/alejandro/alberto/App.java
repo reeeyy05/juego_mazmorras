@@ -14,8 +14,7 @@ import javafx.stage.Stage;
 /**
  * Clase principal de la aplicación
  * 
- * @autor Alejandro Rey Tostado
- * @autor Alberto García Izquierdo
+ * @author  Alejandro Rey Tostado y Alberto García Izquierdo
  */
 
 public class App extends Application {

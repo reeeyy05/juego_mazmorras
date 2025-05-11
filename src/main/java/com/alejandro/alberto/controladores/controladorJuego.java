@@ -1,8 +1,8 @@
 package com.alejandro.alberto.controladores;
 
 import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.List;
 import java.util.Random;
 
@@ -18,7 +18,6 @@ import javafx.scene.layout.GridPane;
 
 public class controladorJuego {
     private static final int TAMANO_CELDA = 30;
-    private static final int TAMANO_TABLERO = 15;
 
     @FXML private GridPane mapaGrid;
     @FXML private Label nombreLabel;
@@ -43,14 +42,16 @@ public class controladorJuego {
 
     public void initialize() {
         try {
+            // Cargar imágenes
             imgProta = new Image("/com/alejandro/alberto/recursos/personaje.png");
             imgEnemigo = new Image("/com/alejandro/alberto/recursos/enemigo.png");
             imgSuelo = new Image("/com/alejandro/alberto/recursos/suelo.png");
             imgPared = new Image("/com/alejandro/alberto/recursos/pared.png");
 
-            cargarEscenario("src/main/resources/com/alejandro/alberto/recursos/escenario.txt");
+            // Cargar el escenario
+            cargarEscenario("/com/alejandro/alberto/recursos/escenario.txt");
 
-            // Solicita el foco para capturar las teclas
+            // Solicitar el foco para capturar las teclas
             mapaGrid.setFocusTraversable(true);
             mapaGrid.requestFocus();
 
@@ -60,9 +61,10 @@ public class controladorJuego {
     }
 
     private void cargarEscenario(String rutaArchivo) throws IOException {
-        mapaGrid.getChildren().clear();
+        mapaGrid.getChildren().clear(); // Limpiar el GridPane
 
-        try (BufferedReader br = new BufferedReader(new FileReader(rutaArchivo))) {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(
+                getClass().getResourceAsStream(rutaArchivo)))) {
             String linea;
             int fila = 0;
 
@@ -79,8 +81,8 @@ public class controladorJuego {
                     }
 
                     if (imageView != null) {
-                        imageView.setFitWidth(TAMANO_CELDA - 2);
-                        imageView.setFitHeight(TAMANO_CELDA - 2);
+                        imageView.setFitWidth(TAMANO_CELDA); // Ajustar tamaño de la imagen
+                        imageView.setFitHeight(TAMANO_CELDA);
                         mapaGrid.add(imageView, columna, fila); // Agregar la imagen al GridPane
                     }
                 }
@@ -93,8 +95,8 @@ public class controladorJuego {
         // Dibujar al protagonista
         if (protagonista != null) {
             ImageView jugadorView = new ImageView(imgProta);
-            jugadorView.setFitWidth(TAMANO_CELDA - 2);
-            jugadorView.setFitHeight(TAMANO_CELDA - 2);
+            jugadorView.setFitWidth(TAMANO_CELDA);
+            jugadorView.setFitHeight(TAMANO_CELDA);
             mapaGrid.add(jugadorView, protagonista.getX(), protagonista.getY());
         }
 
@@ -103,8 +105,8 @@ public class controladorJuego {
             for (Enemigo enemigo : enemigos) {
                 if (enemigo.estaVivo()) {
                     ImageView enemigoView = new ImageView(imgEnemigo);
-                    enemigoView.setFitWidth(TAMANO_CELDA - 2);
-                    enemigoView.setFitHeight(TAMANO_CELDA - 2);
+                    enemigoView.setFitWidth(TAMANO_CELDA);
+                    enemigoView.setFitHeight(TAMANO_CELDA);
                     mapaGrid.add(enemigoView, enemigo.getX(), enemigo.getY());
                 }
             }
@@ -137,7 +139,7 @@ public class controladorJuego {
         int nuevaX = protagonista.getX() + dx;
         int nuevaY = protagonista.getY() + dy;
 
-        if (nuevaX < 0 || nuevaY < 0 || nuevaX >= TAMANO_TABLERO || nuevaY >= TAMANO_TABLERO) {
+        if (nuevaX < 0 || nuevaY < 0 || nuevaX >= mapaGrid.getColumnConstraints().size() || nuevaY >= mapaGrid.getRowConstraints().size()) {
             return;
         }
 
