@@ -16,7 +16,7 @@
     <!-- Imagen de fondo RPG -->
     <ImageView fitHeight="512" fitWidth="768" preserveRatio="false">
         <image>
-            <Image url="@../data/fondo_personaje.png" />
+            <Image url="@../recursos/fondo_personaje.png" />
         </image>
     </ImageView>
 
@@ -27,7 +27,7 @@
         <VBox alignment="CENTER">
             <ImageView fx:id="personaje" fitHeight="195.0" fitWidth="139.0">
                 <image>
-                    <Image url="@../data/personaje.png" />
+                    <Image url="@../recursos/personaje.png" />
                 </image>
             </ImageView>
         </VBox>

@@ -10,6 +10,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+/**
+ * Clase controladorPersonaje que maneja la creación del personaje
+ * 
+ * @author Alejandro Rey Tostado y Alberto García Izquierdo
+ */
 public class controladorPersonaje {
     @FXML private TextField nombre;
     @FXML private TextField salud;
@@ -19,7 +24,7 @@ public class controladorPersonaje {
     @FXML
     private void initialize() {
         try {
-            Image image = new Image(getClass().getResourceAsStream("/com/alejandro/alberto/data/personaje.png"));
+            Image image = new Image(getClass().getResourceAsStream("/com/alejandro/alberto/recursos/personaje.png"));
             personaje.setImage(image);
         } catch (Exception e) {
             System.err.println("Error al cargar la imagen: " + e.getMessage());
