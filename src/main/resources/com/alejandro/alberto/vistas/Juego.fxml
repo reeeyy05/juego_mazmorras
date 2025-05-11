@@ -1,35 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<GridPane hgap="0" vgap="0" xmlns="http://javafx.com/javafx/23.0.1" 
-          xmlns:fx="http://javafx.com/fxml/1" 
-          fx:controller="com.alejandro.alberto.controladores.controladorJuego"
-          onKeyPressed="#manejarTeclas">
+<GridPane hgap="0" onKeyPressed="#manejarTeclas" vgap="0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.alejandro.alberto.controladores.controladorJuego">
 
-    <!-- Panel del tablero 15x15 -->
+    <!-- Panel del tablero -->
     <GridPane fx:id="mapaGrid" hgap="0" vgap="0" GridPane.columnIndex="0" GridPane.rowIndex="0">
+        <!-- 15 columnas -->
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="30.0" />
+            <!-- Repetir para las 15 columnas -->
+        </columnConstraints>
+        <!-- 15 filas -->
+        <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <!-- Repetir para las 15 filas -->
+        </rowConstraints>
+      <children>
+         <ImageView fitHeight="451.0" fitWidth="454.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@../data/tablero.png" />
+            </image>
+         </ImageView>
+      </children>
     </GridPane>
 
     <!-- Panel de estadísticas -->
-    <VBox spacing="10" style="-fx-padding: 20px; -fx-background-color: #333333;" 
-          GridPane.columnIndex="1" GridPane.rowIndex="0">
-        <Label text="Controles: Flechas" style="-fx-text-fill: white; -fx-font-weight: bold;"/>
-        <Label fx:id="nombre" text="Nombre: " style="-fx-text-fill: white;"/>
-        <Label fx:id="salud" text="Salud: " style="-fx-text-fill: white;"/>
-        <Label fx:id="fuerza" text="Fuerza: " style="-fx-text-fill: white;"/>
-        <Label fx:id="defensa" text="Defensa: " style="-fx-text-fill: white;"/>
+    <VBox spacing="15" style="-fx-padding: 20px; -fx-background-color: #333333;" GridPane.columnIndex="1" GridPane.rowIndex="0">
+        <Label style="-fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 18;" text="ESTADÍSTICAS" />
+        <Label fx:id="nombreLabel" style="-fx-text-fill: white; -fx-font-size: 16;" />
+        <Label fx:id="saludLabel" style="-fx-text-fill: white; -fx-font-size: 16;" />
+        <Label fx:id="fuerzaLabel" style="-fx-text-fill: white; -fx-font-size: 16;" />
+        <Label fx:id="defensaLabel" style="-fx-text-fill: white; -fx-font-size: 16;" />
     </VBox>
 
     <columnConstraints>
-        <ColumnConstraints prefWidth="450"/> <!-- 15x30 -->
-        <ColumnConstraints prefWidth="250"/>
+        <ColumnConstraints prefWidth="450" /> <!-- 15x30 -->
+        <ColumnConstraints prefWidth="250" />
     </columnConstraints>
     <rowConstraints>
-        <RowConstraints prefHeight="450"/> <!-- 15x30 -->
+        <RowConstraints prefHeight="450" /> <!-- 15x30 -->
     </rowConstraints>
 </GridPane>
