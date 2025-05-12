@@ -48,7 +48,7 @@ public class Mapa {
             for (int i = 0; i < filas; i++) {
                 String[] elementos = lineas.get(i).split(" ");
                 for (int j = 0; j < columnas; j++) {
-                    String tipo = elementos[j].equals("P") ? "pared" : "suelo";
+                    String tipo = elementos[j].equals("#") ? "pared" : "suelo";
                     celda[i][j] = new Celda(tipo, i, j);
                 }
             }
