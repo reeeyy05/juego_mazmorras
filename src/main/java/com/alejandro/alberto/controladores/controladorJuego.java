@@ -16,6 +16,12 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 
+/**
+ * Clase controladorPersonaje que maneja la creación del personaje
+ * 
+ * @author Alejandro Rey Tostado y Alberto García Izquierdo
+ */
+
 public class controladorJuego {
     private static final int TAMANO_CELDA = 30;
 
