@@ -19,6 +19,8 @@ import javafx.scene.layout.GridPane;
 
 public class controladorJuego {
     private static final int TAMANO_CELDA = 30;
+    private static final int MAX_FILAS = 15;
+    private static final int MAX_COLUMNAS = 15;
 
     @FXML private GridPane mapaGrid;
     @FXML private Label nombreLabel;
@@ -78,28 +80,29 @@ public class controladorJuego {
 
         try (BufferedReader br = new BufferedReader(new InputStreamReader(
                 getClass().getResourceAsStream(rutaArchivo)))) {
-            String linea;
-            int fila = 0;
 
-            while ((linea = br.readLine()) != null) {
-                mapa.add(linea);
-                for (int columna = 0; columna < linea.length(); columna++) {
-                    char celda = linea.charAt(columna);
-                    ImageView imageView = null;
+            for (int fila = 0; fila < MAX_FILAS; fila++) {
+                String linea = br.readLine();
+                if (linea == null) linea = "";
 
-                    if (celda == '#') {
-                        imageView = new ImageView(imgPared);
-                    } else if (celda == '-') {
-                        imageView = new ImageView(imgSuelo);
+                StringBuilder procesada = new StringBuilder();
+                for (int columna = 0; columna < MAX_COLUMNAS; columna++) {
+                    char c = (columna < linea.length()) ? linea.charAt(columna) : '-';
+
+                    // Forzar paredes en los bordes
+                    if (fila == 0 || fila == MAX_FILAS - 1 || columna == 0 || columna == MAX_COLUMNAS - 1) {
+                        c = '#';
+                    } else if (c != '#' && c != '-') {
+                        c = '-';
                     }
 
-                    if (imageView != null) {
-                        imageView.setFitWidth(TAMANO_CELDA);
-                        imageView.setFitHeight(TAMANO_CELDA);
-                        mapaGrid.add(imageView, columna, fila);
-                    }
+                    procesada.append(c);
+                    ImageView imageView = new ImageView((c == '#') ? imgPared : imgSuelo);
+                    imageView.setFitWidth(TAMANO_CELDA);
+                    imageView.setFitHeight(TAMANO_CELDA);
+                    mapaGrid.add(imageView, columna, fila);
                 }
-                fila++;
+                mapa.add(procesada.toString());
             }
         }
     }
@@ -149,12 +152,8 @@ public class controladorJuego {
         int nuevaX = protagonista.getX() + dx;
         int nuevaY = protagonista.getY() + dy;
 
-        if (nuevaX < 0 || nuevaY < 0 || nuevaY >= mapa.size() || nuevaX >= mapa.get(nuevaY).length()) {
-            return;
-        }
-
-        char destino = mapa.get(nuevaY).charAt(nuevaX);
-        if (destino == '#') return;
+        if (nuevaX < 0 || nuevaY < 0 || nuevaY >= mapa.size() || nuevaX >= mapa.get(nuevaY).length()) return;
+        if (mapa.get(nuevaY).charAt(nuevaX) == '#') return;
 
         protagonista.setPosicion(nuevaX, nuevaY);
     }
@@ -164,8 +163,7 @@ public class controladorJuego {
             if (!enemigo.estaVivo()) continue;
 
             int dx = 0, dy = 0;
-            int distancia = Math.abs(enemigo.getX() - protagonista.getX()) + 
-                            Math.abs(enemigo.getY() - protagonista.getY());
+            int distancia = Math.abs(enemigo.getX() - protagonista.getX()) + Math.abs(enemigo.getY() - protagonista.getY());
 
             if (distancia <= enemigo.getPercepcion()) {
                 if (enemigo.getX() != protagonista.getX()) {
@@ -191,22 +189,18 @@ public class controladorJuego {
             int nuevaX = enemigo.getX() + dx;
             int nuevaY = enemigo.getY() + dy;
 
-            if (nuevaX < 0 || nuevaY < 0 || nuevaY >= mapa.size() || nuevaX >= mapa.get(nuevaY).length()) {
-                continue;
-            }
+            if (nuevaX < 0 || nuevaY < 0 || nuevaY >= mapa.size() || nuevaX >= mapa.get(nuevaY).length()) continue;
+            if (mapa.get(nuevaY).charAt(nuevaX) == '#') continue;
 
-            char destino = mapa.get(nuevaY).charAt(nuevaX);
-            if (destino == '#') continue;
-
-            boolean posicionOcupada = false;
+            boolean ocupado = false;
             for (Enemigo otro : enemigos) {
                 if (otro != enemigo && otro.getX() == nuevaX && otro.getY() == nuevaY && otro.estaVivo()) {
-                    posicionOcupada = true;
+                    ocupado = true;
                     break;
                 }
             }
 
-            if (!posicionOcupada && !(nuevaX == protagonista.getX() && nuevaY == protagonista.getY())) {
+            if (!ocupado && !(nuevaX == protagonista.getX() && nuevaY == protagonista.getY())) {
                 enemigo.setPosicion(nuevaX, nuevaY);
             }
         }

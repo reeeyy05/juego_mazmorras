@@ -14,9 +14,8 @@ import javafx.stage.Stage;
 /**
  * Clase principal de la aplicación
  * 
- * @author  Alejandro Rey Tostado y Alberto García Izquierdo
+ * @author Alejandro Rey Tostado y Alberto García Izquierdo
  */
-
 public class App extends Application {
 
     private static Stage primaryStage;
@@ -40,13 +39,13 @@ public class App extends Application {
         protagonistaActual = protagonista;
         FXMLLoader loader = new FXMLLoader(App.class.getResource("/com/alejandro/alberto/vistas/Juego.fxml"));
         Parent root = loader.load();
-        
+
         controladorJuego controller = loader.getController();
-        controller.setProtagonista(protagonistaActual); // Configura el protagonista
+        controller.setProtagonista(protagonistaActual);
 
         primaryStage.setScene(new Scene(root, 800, 600));
-        primaryStage.setTitle("Juego de Mazmorras - " + protagonistaActual.getNombre());
         root.requestFocus();
+        primaryStage.setTitle("Juego de Mazmorras - " + protagonistaActual.getNombre());
     }
 
     public static void main(String[] args) {
