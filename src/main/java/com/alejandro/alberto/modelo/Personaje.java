@@ -43,23 +43,32 @@ public abstract class Personaje {
     }
 
     /**
-     * Metodo en el que se introduce la cantidad de daño que ha recibido el
-     * personaje y se le resta a la salud
+     * Metodo en el que se introduce la cantidad de daño que ha recibido el personaje y se le resta
      * 
      * @param cantidad cantidad de daño recibido
      */
     public void recibirDanio(int cantidad) {
-        int danioReal = cantidad - this.defensa;
-        if (danioReal > 0 ) {
-            this.salud -= danioReal;
-            System.out.println(this.nombre + " ha recibido " + danioReal + " puntos de daño. Salud restante: " + this.salud);
-        } else System.out.println(this.nombre + " ha recibido " + cantidad + " puntos de daño. No le afecta por su defensa.");
+        if (defensa > 0) {
+            int restante = cantidad - defensa;
+            defensa -= cantidad;
+            if (defensa < 0) defensa = 0;
 
-        if (this.salud <=0) {
-            this.salud = 0;
-            System.out.println(this.nombre + " ha muerto");
+            if (restante > 0) {
+                salud -= restante;
+            }
+        } else {
+            salud -= cantidad;
+        }
+
+        if (salud < 0) salud = 0;
+
+        System.out.println(nombre + " - Salud: " + salud + ", Defensa: " + defensa);
+
+        if (!estaVivo()) {
+            System.out.println(nombre + " ha muerto");
         }
     }
+
 
     /**
      * Realiza un ataque sobre otro personaje
