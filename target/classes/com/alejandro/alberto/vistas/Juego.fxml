@@ -58,8 +58,8 @@
     <!-- Panel derecho: estadísticas con fondo -->
     <VBox spacing="15" style="-fx-padding: 20px; -fx-background-color: #333333;"
         GridPane.columnIndex="1" GridPane.rowIndex="0">
-        <Label style="-fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 18;"
-            text="CONTROLES: FLECHAS" />
+        <Label style="-fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 18;" text="CONTROLES: FLECHAS" />
+        <Label fx:id="turnoLabel" style="-fx-text-fill: white; -fx-font-size: 16;" text="Turno: Jugador" />
         <Label fx:id="nombreLabel" style="-fx-text-fill: white; -fx-font-size: 16;" text="Nombre:" />
         <Label fx:id="saludLabel" style="-fx-text-fill: white; -fx-font-size: 16;" text="Salud:" />
         <Label fx:id="fuerzaLabel" style="-fx-text-fill: white; -fx-font-size: 16;" text="Fuerza:" />

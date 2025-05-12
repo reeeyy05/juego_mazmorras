@@ -29,11 +29,13 @@ public class controladorJuego {
     private static final int MAX_COLUMNAS = 15;
 
     @FXML private GridPane mapaGrid;
+    @FXML private Label turnoLabel;
     @FXML private Label nombreLabel;
     @FXML private Label saludLabel;
     @FXML private Label fuerzaLabel;
     @FXML private Label defensaLabel;
 
+    private boolean turnoJugador = true;
     private Protagonista protagonista;
     private List<Enemigo> enemigos;
     private Image imgProta;
@@ -185,7 +187,7 @@ public class controladorJuego {
      */
     @FXML
     public void manejarTeclas(KeyEvent event) {
-        if (!protagonista.estaVivo() || juegoTerminado) return;
+        if (!protagonista.estaVivo() || juegoTerminado || !turnoJugador) return;
 
         switch (event.getCode()) {
             case UP: moverProtagonista(0, -1); break;
@@ -195,18 +197,40 @@ public class controladorJuego {
             default: return;
         }
 
-        moverEnemigos();
         actualizarEstadisticas();
         dibujarTablero();
+
+        turnoJugador = false;
+        turnoLabel.setText("Turno: Enemigos");
 
         if (!protagonista.estaVivo()) {
             juegoTerminado = true;
             mostrarGameOver();
-        } else if (enemigos.stream().noneMatch(Enemigo::estaVivo)) {
-            juegoTerminado = true;
-            mostrarVictoria();
+        } else {
+            // Permite que el enemigo se mueva tras un breve retraso
+            new Thread(() -> {
+                try {
+                    Thread.sleep(300); // Retardo para claridad visual
+                } catch (InterruptedException e) {}
+                javafx.application.Platform.runLater(() -> {
+                    moverEnemigos();
+                    actualizarEstadisticas();
+                    dibujarTablero();
+                    turnoJugador = true;
+                    turnoLabel.setText("Turno: Jugador");
+
+                    if (!protagonista.estaVivo()) {
+                        juegoTerminado = true;
+                        mostrarGameOver();
+                    } else if (enemigos.stream().noneMatch(Enemigo::estaVivo)) {
+                        juegoTerminado = true;
+                        mostrarVictoria();
+                    }
+                });
+            }).start();
         }
     }
+
 
     /**
      * Método para mover al protagonista

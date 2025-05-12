@@ -20,7 +20,7 @@ public class App extends Application {
 
     private static Stage primaryStage;
     private static Protagonista protagonistaActual;
-
+    
     /**
      * Método principal de la aplicación
      * 
