@@ -20,7 +20,7 @@ public class Mapa {
      * Constructor: carga el mapa desde un archivo de texto.
      * 
      * @param rutaArchivo Ruta del archivo del mapa.
-     */ 
+     */
     public Mapa(String rutaArchivo) throws IOException {
         cargarMapa(rutaArchivo);
     }
@@ -57,7 +57,7 @@ public class Mapa {
         }
     }
 
-    public Celda[][] getCelda() {
+    public Celda[][] getCeldas() {
         return this.celda;
     }
 

@@ -12,12 +12,11 @@ public class Celda {
     private int columna;
     private Personaje personaje; // Personaje que ocupa la celda, si lo hay
 
-
     /**
      * Crea una celda con la posicion y el tipo
      * 
-     * @param tipo "suelo" o "pared"
-     * @param fila numero de fila de la celda
+     * @param tipo    "suelo" o "pared"
+     * @param fila    numero de fila de la celda
      * @param columna numero de columna de la celda
      */
     public Celda(String tipo, int fila, int columna) {
@@ -35,6 +34,14 @@ public class Celda {
      */
     public boolean estaOcupada() {
         return this.personaje != null;
+    }
+
+    public boolean esTransitable() {
+        return tipo.equals("suelo") && !estaOcupada();
+    }
+
+    public boolean contieneEnemigo() {
+        return estaOcupada() && !personaje.esProtagonista();
     }
 
     // Getters y Setters
@@ -69,5 +76,5 @@ public class Celda {
 
     public void setPersonaje(Personaje personaje) {
         this.personaje = personaje;
-    }    
+    }
 }
