@@ -20,11 +20,16 @@ public class controladorJuego {
     private static final int TAMANO_CELDA = 30;
     private static final int TAMANO_TABLERO = 15;
 
-    @FXML private GridPane mapaGrid;
-    @FXML private Label nombreLabel;
-    @FXML private Label saludLabel;
-    @FXML private Label fuerzaLabel;
-    @FXML private Label defensaLabel;
+    @FXML
+    private GridPane mapaGrid;
+    @FXML
+    private Label nombreLabel;
+    @FXML
+    private Label saludLabel;
+    @FXML
+    private Label fuerzaLabel;
+    @FXML
+    private Label defensaLabel;
 
     private Protagonista protagonista;
     private List<Enemigo> enemigos;
@@ -123,11 +128,20 @@ public class controladorJuego {
     @FXML
     public void manejarTeclas(KeyEvent event) {
         switch (event.getCode()) {
-            case UP: moverProtagonista(0, -1); break;
-            case DOWN: moverProtagonista(0, 1); break;
-            case LEFT: moverProtagonista(-1, 0); break;
-            case RIGHT: moverProtagonista(1, 0); break;
-            default: return;
+            case UP:
+                moverProtagonista(0, -1);
+                break;
+            case DOWN:
+                moverProtagonista(0, 1);
+                break;
+            case LEFT:
+                moverProtagonista(-1, 0);
+                break;
+            case RIGHT:
+                moverProtagonista(1, 0);
+                break;
+            default:
+                return;
         }
         dibujarTablero();
         actualizarEstadisticas();
