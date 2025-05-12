@@ -55,9 +55,9 @@ public class controladorJuego {
         actualizarEstadisticas();
 
         enemigos = new ArrayList<>();
-        int[][] posicionesEnemigos = {{3, 3}, {3, 11}, {11, 3}, {11, 11}};
+        int[][] posicionesEnemigos = {{3, 3}, {11, 11}};
         for (int[] pos : posicionesEnemigos) {
-            Enemigo enemigo = new Enemigo(50, 5, 2, 5);
+            Enemigo enemigo = new Enemigo(50, 10, 5, 5);
             enemigo.setPosicion(pos[0], pos[1]);
             enemigos.add(enemigo);
         }
