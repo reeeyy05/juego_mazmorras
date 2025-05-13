@@ -18,9 +18,9 @@ import javafx.stage.Stage;
  */
 public class App extends Application {
 
-    private static Stage primaryStage;
+    private static Stage scenePerso;
     private static Protagonista protagonistaActual;
-    
+
     /**
      * Método principal de la aplicación
      * 
@@ -28,7 +28,7 @@ public class App extends Application {
      */
     @Override
     public void start(Stage stage) throws IOException {
-        primaryStage = stage;
+        scenePerso = stage;
         mostrarVistaCreacionPersonaje();
         stage.setTitle("Juego de Mazmorras - Creación de Personaje");
         stage.setResizable(false);
@@ -42,7 +42,7 @@ public class App extends Application {
      */
     public static void mostrarVistaCreacionPersonaje() throws IOException {
         Parent root = FXMLLoader.load(App.class.getResource("/com/alejandro/alberto/vistas/CreacionPersonaje.fxml"));
-        primaryStage.setScene(new Scene(root, 768, 512));
+        scenePerso.setScene(new Scene(root, 768, 512));
     }
 
     /**
@@ -59,9 +59,9 @@ public class App extends Application {
         controladorJuego controller = loader.getController();
         controller.setProtagonista(protagonistaActual);
 
-        primaryStage.setScene(new Scene(root, 800, 600));
+        scenePerso.setScene(new Scene(root, 800, 600));
         root.requestFocus();
-        primaryStage.setTitle("Juego de Mazmorras - " + protagonistaActual.getNombre());
+        scenePerso.setTitle("Juego de Mazmorras - " + protagonistaActual.getNombre());
     }
 
     public static void main(String[] args) {

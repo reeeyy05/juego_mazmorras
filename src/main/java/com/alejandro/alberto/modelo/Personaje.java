@@ -18,9 +18,9 @@ public abstract class Personaje {
     /**
      * Constructor para todos los personajes
      * 
-     * @param nombre nombre del personaje
-     * @param salud salud del personaje
-     * @param fuerza fuerza del personaje
+     * @param nombre  nombre del personaje
+     * @param salud   salud del personaje
+     * @param fuerza  fuerza del personaje
      * @param defensa defensa del personaje
      */
     public Personaje(String nombre, int salud, int fuerza, int defensa) {
@@ -43,7 +43,8 @@ public abstract class Personaje {
     }
 
     /**
-     * Metodo en el que se introduce la cantidad de daño que ha recibido el personaje y se le resta
+     * Metodo en el que se introduce la cantidad de daño que ha recibido el
+     * personaje y se le resta
      * 
      * @param cantidad cantidad de daño recibido
      */
@@ -51,7 +52,8 @@ public abstract class Personaje {
         if (defensa > 0) {
             int restante = cantidad - defensa;
             defensa -= cantidad;
-            if (defensa < 0) defensa = 0;
+            if (defensa < 0)
+                defensa = 0;
 
             if (restante > 0) {
                 salud -= restante;
@@ -60,7 +62,8 @@ public abstract class Personaje {
             salud -= cantidad;
         }
 
-        if (salud < 0) salud = 0;
+        if (salud < 0)
+            salud = 0;
 
         System.out.println(nombre + " - Salud: " + salud + ", Defensa: " + defensa);
 
@@ -68,7 +71,6 @@ public abstract class Personaje {
             System.out.println(nombre + " ha muerto");
         }
     }
-
 
     /**
      * Realiza un ataque sobre otro personaje
@@ -142,5 +144,5 @@ public abstract class Personaje {
     public void setY(int y) {
         this.y = y;
     }
-    
+
 }

@@ -18,11 +18,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 
-/**
- * Clase que controla la lógica del juego
- * 
- * @author Alejandro Rey Tostado y Alberto García Izquierdo
- */
 public class controladorJuego {
     private static final int TAMANO_CELDA = 30;
     private static final int MAX_FILAS = 15;
@@ -46,26 +41,15 @@ public class controladorJuego {
     private List<String> mapa = new ArrayList<>();
     private boolean juegoTerminado = false;
 
-    /**
-     * Método que se llama al iniciar el controlador
-     * 
-     * @param protagonista El protagonista que se va a jugar
-     */
     public void setProtagonista(Protagonista protagonista) {
         this.protagonista = protagonista;
         protagonista.setPosicion(7, 7);
         actualizarEstadisticas();
 
-        enemigos = new ArrayList<>();
-        int[][] posicionesEnemigos = {{3, 3}, {11, 11}};
-        for (int[] pos : posicionesEnemigos) {
-            Enemigo enemigo = new Enemigo(50, 10, 5, 5);
-            enemigo.setPosicion(pos[0], pos[1]);
-            enemigos.add(enemigo);
-        }
+        cargarEnemigosDesdeArchivo("/com/alejandro/alberto/recursos/enemigos.txt");
 
         try {
-            controladorJuego.this.cargarEscenario("/com/alejandro/alberto/recursos/escenario.txt");
+            cargarEscenario("/com/alejandro/alberto/recursos/escenario.txt");
         } catch (IOException e) {
             System.err.println("Error al cargar escenario: " + e.getMessage());
         }
@@ -73,9 +57,6 @@ public class controladorJuego {
         dibujarTablero();
     }
 
-    /**
-     * Método que se llama al inicializar el controlador
-     */
     public void initialize() {
         try {
             imgProta = new Image(getClass().getResource("/com/alejandro/alberto/recursos/personaje.png").toExternalForm());
@@ -91,12 +72,30 @@ public class controladorJuego {
         }
     }
 
-    /**
-     * Método para cargar el escenario desde un archivo
-     * 
-     * @param rutaArchivo Ruta del archivo del escenario
-     * @throws IOException Si ocurre un error al leer el archivo
-     */
+    private void cargarEnemigosDesdeArchivo(String ruta) {
+        enemigos = new ArrayList<>();
+
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(
+                getClass().getResourceAsStream(ruta)))) {
+
+            String linea;
+            while ((linea = br.readLine()) != null) {
+                String[] partes = linea.split(",");
+                if (partes.length == 2) {
+                    int fila = Integer.parseInt(partes[0].trim());
+                    int columna = Integer.parseInt(partes[1].trim());
+
+                    Enemigo enemigo = new Enemigo(50, 10, 5, 5); // valores por defecto
+                    enemigo.setPosicion(columna, fila); // columna = x, fila = y
+                    enemigos.add(enemigo);
+                }
+            }
+
+        } catch (IOException e) {
+            System.err.println("Error al cargar enemigos: " + e.getMessage());
+        }
+    }
+
     private void cargarEscenario(String rutaArchivo) throws IOException {
         mapa.clear();
         mapaGrid.getChildren().clear();
@@ -129,9 +128,6 @@ public class controladorJuego {
         }
     }
 
-    /**
-     * Método para cargar el escenario
-     */
     private void cargarEscenario() {
         mapaGrid.getChildren().clear();
         for (int fila = 0; fila < mapa.size(); fila++) {
@@ -145,9 +141,6 @@ public class controladorJuego {
         }
     }
 
-    /**
-     * Método para dibujar el tablero
-     */
     private void dibujarTablero() {
         cargarEscenario();
 
@@ -168,9 +161,6 @@ public class controladorJuego {
         }
     }
 
-    /**
-     * Método para actualizar las estadísticas del protagonista
-     */
     private void actualizarEstadisticas() {
         if (protagonista != null) {
             nombreLabel.setText("Nombre: " + protagonista.getNombre());
@@ -180,14 +170,10 @@ public class controladorJuego {
         }
     }
 
-    /**
-     * Método para manejar las teclas presionadas
-     * 
-     * @param event Evento de la tecla presionada
-     */
     @FXML
     public void manejarTeclas(KeyEvent event) {
-        if (!protagonista.estaVivo() || juegoTerminado || !turnoJugador) return;
+        if (!protagonista.estaVivo() || juegoTerminado || !turnoJugador)
+            return;
 
         switch (event.getCode()) {
             case UP: moverProtagonista(0, -1); break;
@@ -207,17 +193,16 @@ public class controladorJuego {
             juegoTerminado = true;
             mostrarGameOver();
         } else {
-            // Permite que el enemigo se mueva tras un breve retraso
             new Thread(() -> {
                 try {
-                    Thread.sleep(300); // Retardo para claridad visual
+                    Thread.sleep(300);
                 } catch (InterruptedException e) {}
                 javafx.application.Platform.runLater(() -> {
                     moverEnemigos();
                     actualizarEstadisticas();
                     dibujarTablero();
                     turnoJugador = true;
-                    turnoLabel.setText("Turno: Jugador");
+                    turnoLabel.setText("Turno: " + protagonista.getNombre());
 
                     if (!protagonista.estaVivo()) {
                         juegoTerminado = true;
@@ -231,13 +216,6 @@ public class controladorJuego {
         }
     }
 
-
-    /**
-     * Método para mover al protagonista
-     * 
-     * @param dx Cambio en la posición X
-     * @param dy Cambio en la posición Y
-     */
     private void moverProtagonista(int dx, int dy) {
         int nuevaX = protagonista.getX() + dx;
         int nuevaY = protagonista.getY() + dy;
@@ -256,15 +234,13 @@ public class controladorJuego {
         protagonista.setPosicion(nuevaX, nuevaY);
     }
 
-    /**
-     * Método para mover a los enemigos
-     */
     private void moverEnemigos() {
         for (Enemigo enemigo : enemigos) {
             if (!enemigo.estaVivo()) continue;
 
             int dx = 0, dy = 0;
-            int distancia = Math.abs(enemigo.getX() - protagonista.getX()) + Math.abs(enemigo.getY() - protagonista.getY());
+            int distancia = Math.abs(enemigo.getX() - protagonista.getX())
+                    + Math.abs(enemigo.getY() - protagonista.getY());
 
             if (distancia == 1) {
                 protagonista.recibirDanio(enemigo.getFuerza());
@@ -273,14 +249,10 @@ public class controladorJuego {
             }
 
             if (distancia <= enemigo.getPercepcion()) {
-                if (enemigo.getX() != protagonista.getX()) {
-                    dx = (enemigo.getX() < protagonista.getX()) ? 1 : -1;
-                } else {
-                    dy = (enemigo.getY() < protagonista.getY()) ? 1 : -1;
-                }
+                dx = (enemigo.getX() < protagonista.getX()) ? 1 : (enemigo.getX() > protagonista.getX()) ? -1 : 0;
+                dy = (enemigo.getY() < protagonista.getY()) ? 1 : (enemigo.getY() > protagonista.getY()) ? -1 : 0;
             } else {
-                int direccion = random.nextInt(4);
-                switch (direccion) {
+                switch (random.nextInt(4)) {
                     case 0: dy = -1; break;
                     case 1: dy = 1; break;
                     case 2: dx = -1; break;
@@ -300,39 +272,25 @@ public class controladorJuego {
                 continue;
             }
 
-            boolean ocupado = false;
-            for (Enemigo otro : enemigos) {
-                if (otro != enemigo && otro.getX() == nuevaX && otro.getY() == nuevaY && otro.estaVivo()) {
-                    ocupado = true;
-                    break;
-                }
-            }
-
+            boolean ocupado = enemigos.stream().anyMatch(e -> e != enemigo && e.getX() == nuevaX && e.getY() == nuevaY && e.estaVivo());
             if (!ocupado) enemigo.setPosicion(nuevaX, nuevaY);
         }
     }
 
-    /**
-     * Método para mostrar el mensaje de Game Over
-     */
     private void mostrarGameOver() {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle("Fin del juego");
         alert.setHeaderText("Has sido derrotado");
         alert.setContentText("Tu personaje ha perdido toda la vida");
         alert.showAndWait();
-        mapaGrid.setDisable(true);
+        System.exit(0); // Termina el juego
     }
 
-    /**
-     * Método para mostrar el mensaje de victoria
-     */
     private void mostrarVictoria() {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle("¡Victoria!");
         alert.setHeaderText("Todos los enemigos han sido derrotados");
-        alert.setContentText("¡Has ganado la partida!");
         alert.showAndWait();
-        mapaGrid.setDisable(true);
+        System.exit(0); // Termina el juego
     }
 }

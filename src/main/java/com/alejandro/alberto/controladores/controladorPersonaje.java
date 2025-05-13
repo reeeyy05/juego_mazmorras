@@ -16,10 +16,14 @@ import javafx.scene.image.ImageView;
  * @author Alejandro Rey Tostado y Alberto García Izquierdo
  */
 public class controladorPersonaje {
-    @FXML private TextField nombre;
-    @FXML private TextField salud;
-    @FXML private TextField fuerza;
-    @FXML private ImageView personaje;
+    @FXML
+    private TextField nombre;
+    @FXML
+    private TextField salud;
+    @FXML
+    private TextField fuerza;
+    @FXML
+    private ImageView personaje;
 
     @FXML
     private void initialize() {
