@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"m":"juego.mazmorras","l":"com.alejandro.alberto"},{"m":"juego.mazmorras","l":"com.alejandro.alberto.controladores"},{"m":"juego.mazmorras","l":"com.alejandro.alberto.modelo"}];updateSearchResults();

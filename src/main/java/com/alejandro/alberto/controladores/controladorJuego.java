@@ -18,6 +18,13 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 
+/**
+ * Controlador del juego.
+ * Maneja la logica del juego, el movimiento del protagonista y los enemigos,
+ * y la interaccion con el escenario.
+ * 
+ * @author Alejandro Rey Tostado y Alberto Garcia Izquierdo
+ */
 public class controladorJuego {
     private static final int TAMANO_CELDA = 30;
     private static final int MAX_FILAS = 15;
@@ -41,6 +48,12 @@ public class controladorJuego {
     private List<String> mapa = new ArrayList<>();
     private boolean juegoTerminado = false;
 
+    /**
+     * Establece el protagonista del juego.
+     * Inicializa el escenario y los enemigos.
+     * 
+     * @param protagonista El protagonista del juego.
+     */
     public void setProtagonista(Protagonista protagonista) {
         this.protagonista = protagonista;
         protagonista.setPosicion(7, 7);
@@ -57,6 +70,10 @@ public class controladorJuego {
         dibujarTablero();
     }
 
+    /**
+     * Inicializa los recursos del juego.
+     * Carga las imagenes y establece el foco en el GridPane.
+     */
     public void initialize() {
         try {
             imgProta = new Image(getClass().getResource("/com/alejandro/alberto/recursos/personaje.png").toExternalForm());
@@ -72,6 +89,12 @@ public class controladorJuego {
         }
     }
 
+    /**
+     * Carga los enemigos desde un archivo de texto.
+     * Cada linea del archivo debe contener la fila y columna del enemigo separados por una coma.
+     * 
+     * @param ruta Ruta del archivo de texto con los enemigos.
+     */
     private void cargarEnemigosDesdeArchivo(String ruta) {
         enemigos = new ArrayList<>();
 
@@ -96,6 +119,13 @@ public class controladorJuego {
         }
     }
 
+    /**
+     * Carga el escenario desde un archivo de texto.
+     * Cada linea del archivo representa una fila del escenario.
+     * 
+     * @param rutaArchivo Ruta del archivo de texto con el escenario.
+     * @throws IOException Si ocurre un error al leer el archivo.
+     */
     private void cargarEscenario(String rutaArchivo) throws IOException {
         mapa.clear();
         mapaGrid.getChildren().clear();
@@ -128,6 +158,10 @@ public class controladorJuego {
         }
     }
 
+    /**
+     * Carga el escenario en el GridPane.
+     * Limpia el GridPane y dibuja el escenario basado en la lista de mapas.
+     */
     private void cargarEscenario() {
         mapaGrid.getChildren().clear();
         for (int fila = 0; fila < mapa.size(); fila++) {
@@ -141,6 +175,10 @@ public class controladorJuego {
         }
     }
 
+    /**
+     * Dibuja el tablero en el GridPane.
+     * Limpia el GridPane y dibuja el escenario, los enemigos y el protagonista.
+     */
     private void dibujarTablero() {
         cargarEscenario();
 
@@ -161,6 +199,10 @@ public class controladorJuego {
         }
     }
 
+    /**
+     * Actualiza las estadisticas del protagonista en la interfaz.
+     * Muestra el nombre, salud, fuerza y defensa del protagonista.
+     */
     private void actualizarEstadisticas() {
         if (protagonista != null) {
             nombreLabel.setText("Nombre: " + protagonista.getNombre());
@@ -170,6 +212,13 @@ public class controladorJuego {
         }
     }
 
+    /**
+     * Maneja las teclas presionadas por el jugador.
+     * Mueve al protagonista en la direccion correspondiente.
+     * Si el juego ha terminado o no es el turno del jugador, no hace nada.
+     * 
+     * @param event El evento de la tecla presionada.
+     */
     @FXML
     public void manejarTeclas(KeyEvent event) {
         if (!protagonista.estaVivo() || juegoTerminado || !turnoJugador)
@@ -216,6 +265,13 @@ public class controladorJuego {
         }
     }
 
+    /**
+     * Mueve al protagonista en la direccion especificada.
+     * Verifica si el movimiento es valido y si hay enemigos en la nueva posicion.
+     * 
+     * @param dx Desplazamiento en el eje X.
+     * @param dy Desplazamiento en el eje Y.
+     */
     private void moverProtagonista(int dx, int dy) {
         int nuevaX = protagonista.getX() + dx;
         int nuevaY = protagonista.getY() + dy;
@@ -234,6 +290,10 @@ public class controladorJuego {
         protagonista.setPosicion(nuevaX, nuevaY);
     }
 
+    /**
+     * Mueve a los enemigos en el tablero.
+     * Si un enemigo se encuentra adyacente al protagonista, lo ataca.
+     */
     private void moverEnemigos() {
         for (Enemigo enemigo : enemigos) {
             if (!enemigo.estaVivo()) continue;
@@ -277,6 +337,10 @@ public class controladorJuego {
         }
     }
 
+    /**
+     * Muestra un mensaje de Game Over.
+     * Informa al jugador que ha sido derrotado y termina el juego.
+     */
     private void mostrarGameOver() {
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle("Fin del juego");
@@ -286,6 +350,10 @@ public class controladorJuego {
         System.exit(0); // Termina el juego
     }
 
+    /**
+     * Muestra un mensaje de victoria.
+     * Informa al jugador que ha derrotado a todos los enemigos y termina el juego.
+     */
     private void mostrarVictoria() {
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle("¡Victoria!");

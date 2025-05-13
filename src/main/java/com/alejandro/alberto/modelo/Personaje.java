@@ -3,7 +3,7 @@ package com.alejandro.alberto.modelo;
 /**
  * Clase abstracta que define un personaje del juego
  * 
- * @author Alejandro Rey Tostado y Alberto García Izquierdo
+ * @author Alejandro Rey Tostado y Alberto Garcia Izquierdo
  */
 
 public abstract class Personaje {
@@ -43,7 +43,7 @@ public abstract class Personaje {
     }
 
     /**
-     * Metodo en el que se introduce la cantidad de daño que ha recibido el
+     * Metodo en el que se introduce la cantidad de danio que ha recibido el
      * personaje y se le resta
      * 
      * @param cantidad cantidad de daño recibido

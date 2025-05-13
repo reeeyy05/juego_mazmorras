@@ -2,7 +2,6 @@ package com.alejandro.alberto.controladores;
 
 import com.alejandro.alberto.App;
 import com.alejandro.alberto.modelo.Protagonista;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -11,9 +10,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 /**
- * Clase controladorPersonaje que maneja la creación del personaje
- * 
- * @author Alejandro Rey Tostado y Alberto García Izquierdo
+ * Clase controladorPersonaje que maneja la creacion del personaje
+ *
+ * @author Alejandro Rey Tostado y Alberto Garcia Izquierdo
  */
 public class controladorPersonaje {
     @FXML
@@ -25,6 +24,9 @@ public class controladorPersonaje {
     @FXML
     private ImageView personaje;
 
+    /**
+     * Metodo que se ejecuta al inicializar la vista
+     */
     @FXML
     private void initialize() {
         try {
@@ -35,6 +37,11 @@ public class controladorPersonaje {
         }
     }
 
+    /**
+     * Metodo que se ejecuta al pulsar el boton de comenzar
+     *
+     * @param event evento de pulsar el boton
+     */
     @FXML
     public void comenzar(ActionEvent event) {
         try {
@@ -62,6 +69,12 @@ public class controladorPersonaje {
         }
     }
 
+    /**
+     * Muestra una alerta de tipo error con un titulo especificado y un mensaje informativo.
+     *
+     * @param titulo el título de la alerta
+     * @param mensaje el mensaje de contenido de la alerta
+     */
     private void mostrarAlerta(String titulo, String mensaje) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle(titulo);

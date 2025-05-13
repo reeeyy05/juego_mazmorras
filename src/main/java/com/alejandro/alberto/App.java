@@ -12,9 +12,9 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 /**
- * Clase principal de la aplicación
+ * Clase principal de la aplicacion
  * 
- * @author Alejandro Rey Tostado y Alberto García Izquierdo
+ * @author Alejandro Rey Tostado y Alberto Garcia Izquierdo
  */
 public class App extends Application {
 
@@ -22,21 +22,21 @@ public class App extends Application {
     private static Protagonista protagonistaActual;
 
     /**
-     * Método principal de la aplicación
+     * Metodo principal de la aplicacion
      * 
-     * @param args Argumentos de la línea de comandos
+     * @param stage Argumentos de la línea de comandos
      */
     @Override
     public void start(Stage stage) throws IOException {
         scenePerso = stage;
         mostrarVistaCreacionPersonaje();
-        stage.setTitle("Juego de Mazmorras - Creación de Personaje");
+        stage.setTitle("Juego de Mazmorras - Creacion de Personaje");
         stage.setResizable(false);
         stage.show();
     }
 
     /**
-     * Método para mostrar la vista de creación de personaje
+     * Metodo para mostrar la vista de creacion de personaje
      * 
      * @throws IOException Si ocurre un error al cargar la vista
      */
@@ -46,7 +46,7 @@ public class App extends Application {
     }
 
     /**
-     * Método para mostrar la vista del juego
+     * Metodo para mostrar la vista del juego
      * 
      * @param protagonista El protagonista que se va a jugar
      * @throws IOException Si ocurre un error al cargar la vista

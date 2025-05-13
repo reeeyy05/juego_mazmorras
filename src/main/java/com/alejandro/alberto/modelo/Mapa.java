@@ -8,9 +8,9 @@ import java.util.List;
 
 /**
  * Clase que representa el escenario del juego.
- * Usa una matriz de caracteres donde 'P' es pared y 'S' es suelo.
+ * Usa una matriz de caracteres donde '#' es pared y '-' es suelo.
  * 
- * @author Alejandro Rey Tostado y Alberto García Izquierdo.
+ * @author Alejandro Rey Tostado y Alberto Garcia Izquierdo.
  */
 public class Mapa {
 
@@ -27,7 +27,7 @@ public class Mapa {
 
     /**
      * Carga el mapa desde un archivo de texto.
-     * El archivo debe contener 'P' para paredes y 'S' para suelos.
+     * El archivo debe contener '#' para paredes y '-' para suelos.
      * 
      * @param rutaArchivo Ruta del archivo del mapa.
      */
