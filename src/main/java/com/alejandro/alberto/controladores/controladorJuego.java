@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import com.alejandro.alberto.modelo.Cobarde;
 import com.alejandro.alberto.modelo.Enemigo;
 import com.alejandro.alberto.modelo.Protagonista;
 
@@ -59,7 +60,13 @@ public class controladorJuego {
         protagonista.setPosicion(7, 7);
         actualizarEstadisticas();
 
+        // Cargamos enemigos
         cargarEnemigosDesdeArchivo("/com/alejandro/alberto/recursos/enemigos.txt");
+
+        // Añadimos Cobarde
+        Cobarde cobarde = new Cobarde(30, 5, 4, 5); // como es Cobarde le ponemos menos salud y menos fuerza
+        cobarde.setPosicion(5, 5);
+        enemigos.add(cobarde);
 
         try {
             cargarEscenario("/com/alejandro/alberto/recursos/escenario.txt");
@@ -299,18 +306,27 @@ public class controladorJuego {
             if (!enemigo.estaVivo()) continue;
 
             int dx = 0, dy = 0;
-            int distancia = Math.abs(enemigo.getX() - protagonista.getX())
-                    + Math.abs(enemigo.getY() - protagonista.getY());
+            int distancia = Math.abs(enemigo.getX() - protagonista.getX()) + Math.abs(enemigo.getY() - protagonista.getY());
 
             if (distancia == 1) {
-                protagonista.recibirDanio(enemigo.getFuerza());
-                actualizarEstadisticas();
+                if (!(enemigo instanceof Cobarde)) {
+                    protagonista.recibirDanio(enemigo.getFuerza());
+                    actualizarEstadisticas();
+                }
                 continue;
             }
 
             if (distancia <= enemigo.getPercepcion()) {
-                dx = (enemigo.getX() < protagonista.getX()) ? 1 : (enemigo.getX() > protagonista.getX()) ? -1 : 0;
-                dy = (enemigo.getY() < protagonista.getY()) ? 1 : (enemigo.getY() > protagonista.getY()) ? -1 : 0;
+                if (enemigo instanceof Cobarde) {
+                    // Comportamiento para los Cobardes
+                    int [] direccion = (((Cobarde) enemigo).calcualDireccion(protagonista.getX(), protagonista.getY()));
+                    dx = direccion[0];
+                    dx = direccion[1];
+                } else {
+                    // Movimiento normal enemigo
+                    dx = (enemigo.getX() < protagonista.getX()) ? 1 : (enemigo.getX() > protagonista.getX()) ? -1 : 0;
+                    dy = (enemigo.getY() < protagonista.getY()) ? 1 : (enemigo.getY() > protagonista.getY()) ? -1 : 0;
+                }
             } else {
                 switch (random.nextInt(4)) {
                     case 0: dy = -1; break;

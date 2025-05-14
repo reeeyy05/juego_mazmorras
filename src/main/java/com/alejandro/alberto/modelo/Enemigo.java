@@ -8,7 +8,7 @@ package com.alejandro.alberto.modelo;
  */
 
 public class Enemigo extends Personaje {
-    private int percepcion; // rango de vision del enemigo
+    protected int percepcion; // rango de vision del enemigo
 
     /**
      * Constructor para los enemigos
